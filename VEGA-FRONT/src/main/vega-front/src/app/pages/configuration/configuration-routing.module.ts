@@ -10,7 +10,7 @@ const routes: Routes = [
     component: ConfigurationComponent,
     children: [
       {
-        path: 'classifications',
+        path: 'categories',
         component: CategoryComponent,
       },
     ],

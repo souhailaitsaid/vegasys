@@ -21,7 +21,7 @@
         "menu": {
             "config": "Configuration",
             "dashboard": "Tableau de bord",
-            "fournisseur": "Fournisseurs"
+            "categories": "categories"
         }
     },
     "category": {
