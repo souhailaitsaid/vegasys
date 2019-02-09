@@ -5,7 +5,6 @@ import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
-import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
 
 const socialLinks = [
@@ -34,7 +33,6 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
-  ...DataModule.forRoot().providers,
   ...NbAuthModule.forRoot({
 
     strategies: [

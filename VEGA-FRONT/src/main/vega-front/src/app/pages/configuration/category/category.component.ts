@@ -8,9 +8,9 @@ import { TABLE_DELETE, TABLE_ADD, TABLE_EDIT } from '../../table-config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from '../../../common/modal/confirm-modal/confirm-modal.component';
 @Component({
-  selector: 'classifications',
-  templateUrl: './classifications.component.html',
-  styleUrls: ['./classifications.component.scss']
+  selector: 'category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
 
@@ -60,7 +60,7 @@ export class CategoryComponent implements OnInit {
 
   onDeleteConfirm(event): void {  
     if (event.data) {
-      this.showLargeModal(event.data.classificationId,event)   
+      this.showLargeModal(event.data.categoryId,event)   
     }
   }
 
@@ -101,15 +101,15 @@ export class CategoryComponent implements OnInit {
       edit: TABLE_EDIT,
       delete: TABLE_DELETE,
       columns: {
-        classificationId: {
+        categoryId: {
           width: '150px',
           editable: false,
           addable: false,
           title: this.translate.instant('common.id'),
           type: 'number',
         },
-        label: {
-          title: this.translate.instant('common.label'),
+        categoryName: {
+          title: this.translate.instant('category.categoryName'),
           type: 'string',
         },
         description: {
