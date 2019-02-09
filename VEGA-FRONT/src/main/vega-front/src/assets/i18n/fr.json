@@ -16,16 +16,18 @@
         "label": "Libelle",
         "description": "Description",
         "btn":{
-            "save":"Sauvgarder"
+            "save":"Sauvgarder",
+            "takeMeHome":"Retour à l'acceuil"
         },
         "menu": {
             "config": "Configuration",
             "dashboard": "Tableau de bord",
-            "categories": "categories"
+            "categories": "catégories"
         }
     },
     "category": {
-        "list": "Liste des categories"
+        "list": "Liste des catégories",
+        "categoryName":"Nom de catégorie"
     }
  
 }
