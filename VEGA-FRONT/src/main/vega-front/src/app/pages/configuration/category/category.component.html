@@ -1,0 +1,12 @@
+<div class="row">
+  <nb-card class="full-width">
+      <nb-card-header>
+          {{'category.list' | translate}}
+       </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSave($event)"
+        (createConfirm)="onSave($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card>
+</div>

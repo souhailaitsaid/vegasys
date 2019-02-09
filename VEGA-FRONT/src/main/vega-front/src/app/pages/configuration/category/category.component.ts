@@ -1,20 +1,18 @@
-
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../../../@core/data/category.service';
 import { LocalDataSource } from 'ng2-smart-table';
 import { TranslateService } from '@ngx-translate/core';
 import { ToasterService, ToasterConfig, BodyOutputType, Toast } from 'angular2-toaster';
 import 'style-loader!angular2-toaster/toaster.css';
-import { TABLE_DELETE, TABLE_ADD, TABLE_EDIT } from '../table-config';
+import { TABLE_DELETE, TABLE_ADD, TABLE_EDIT } from '../../table-config';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmModalComponent } from '../../common/modal/confirm-modal/confirm-modal.component';
-import { PersonnelService } from '../../@core/data/personnel.service';
-
+import { ConfirmModalComponent } from '../../../common/modal/confirm-modal/confirm-modal.component';
 @Component({
-  selector: '',
-  templateUrl: './personnel.component.html',
-  styleUrls: ['./personnel.component.scss']
+  selector: 'classifications',
+  templateUrl: './classifications.component.html',
+  styleUrls: ['./classifications.component.scss']
 })
-export class PersonnelComponent implements OnInit {
+export class CategoryComponent implements OnInit {
 
   public elementsList: any[];
   settings;
@@ -25,7 +23,7 @@ export class PersonnelComponent implements OnInit {
     private modalService: NgbModal,
     private toaster: ToasterService,
     private translate: TranslateService,
-    private service: PersonnelService) { }
+    private service: CategoryService) { }
 
     showLargeModal( id : number ,event) {
       const activeModal = this.modalService.open(ConfirmModalComponent, { size: 'lg', container: 'nb-layout' });
@@ -62,7 +60,7 @@ export class PersonnelComponent implements OnInit {
 
   onDeleteConfirm(event): void {  
     if (event.data) {
-      this.showLargeModal(event.data.personnelId,event)   
+      this.showLargeModal(event.data.classificationId,event)   
     }
   }
 
@@ -103,23 +101,19 @@ export class PersonnelComponent implements OnInit {
       edit: TABLE_EDIT,
       delete: TABLE_DELETE,
       columns: {
-        personnelId: {
+        classificationId: {
           width: '150px',
           editable: false,
           addable: false,
           title: this.translate.instant('common.id'),
           type: 'number',
         },
-        code: {
-          title: this.translate.instant('personnel.code'),
+        label: {
+          title: this.translate.instant('common.label'),
           type: 'string',
         },
-        nom: {
-          title: this.translate.instant('personnel.nom'),
-          type: 'string',
-        },
-        prenom: {
-          title: this.translate.instant('personnel.prenom'),
+        description: {
+          title: this.translate.instant('common.description'),
           type: 'string',
         }
       }
@@ -139,5 +133,3 @@ export class PersonnelComponent implements OnInit {
     this.toaster.popAsync(toast);
   }
 }
-
-

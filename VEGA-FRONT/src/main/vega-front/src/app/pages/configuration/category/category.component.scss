@@ -1,4 +1,4 @@
-@import '../../@theme/styles/themes';
+@import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
   .full-width {
@@ -7,6 +7,7 @@
   }
 
   nb-checkbox {
+    margin-bottom: 1rem;
   }
 
   .form-inline > * {
@@ -17,8 +18,4 @@
   nb-card.inline-form-card nb-card-body {
     padding-bottom: 0;
   }
-}
-
-.customised-control .customised-checkbox{
-  margin: 10px;
 }
