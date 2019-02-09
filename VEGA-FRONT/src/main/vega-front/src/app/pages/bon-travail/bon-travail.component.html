@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <nb-card>
+      <nb-card-header>{{'bon-travail.form' | translate}}</nb-card-header>
+      <nb-card-body>
+        <form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+              <input type="text" formControlName="nomMachine" class="form-control" placeholder="{{'bon-travail.nomMachine' | translate}}">
+            </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+              <input type="text" formControlName="label" class="form-control" placeholder="{{'common.description' | translate}}">
+            </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+              <input type="text" formControlName="remarque" class="form-control" placeholder="{{'bon-travail.remarque' | translate}}">
+            </div>
+          </div>
+          </div>
+          <div class="row">
+              <div class="col-md-1">
+                  <div class="form-group">
+                  <nb-checkbox class="check " status="success" formControlName="urgent">{{'bon-travail.urgent' | translate}}</nb-checkbox>
+               
+              </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+              <input type="number" formControlName="dureeArretMachine" class="form-control" placeholder="{{'bon-travail.dureeArretMachine' | translate}}">
+            </div>
+          </div>
+
+            <div class="col-md-2">
+                <div class="form-group">
+              <select class="form-control" formControlName="etatInstallation" [compareWith]="byEtatInstallationId">
+                <option *ngFor="let element of etatInstallations" [ngValue]="element">
+                  {{ element.label }} ({{ element.description }})
+                </option>
+              </select>
+            </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+              <select class="form-control" formControlName="typeTravail" [compareWith]="byTypeTravailId">
+                <option *ngFor="let element of typeTravails" [ngValue]="element">
+                  {{ element.label }} ({{ element.description }})
+                </option>
+              </select>
+            </div>
+            </div>
+
+
+            <div class="col-md-2"> 
+                <div class="form-group"><select class="form-control" formControlName="statutDemandeTravail" [compareWith]="byStatutDemandeTravailId">
+               
+                  <option *ngFor="let element of statutDemandeTravails" [ngValue]="element">
+                  {{ element.label }} ({{ element.description }})
+                </option>
+              </select>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+              <div class="col-md-2"> 
+              <div class="form-group">
+
+            <button type="submit" [disabled]="!form.valid" class="btn btn-primary">{{'common.btn.save' |
+              translate}}</button>
+          </div>  </div>
+        </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="full-width">
+      <nb-card-header>
+        {{'bon-travail.list' | translate}}
+      </nb-card-header>
+      <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+          (userRowSelect)="onUserRowSelect($event)">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+<toaster-container [toasterconfig]="config"></toaster-container>

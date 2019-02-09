@@ -1,0 +1,15 @@
+@import '../../@theme/styles/themes';
+
+@include nb-install-component() {
+    bt-chart-by-status,dt-chart-by-status,dt-chart-by-personnel {
+    display: block;
+    height: nb-theme(card-height-medium);
+    width: 100%;
+
+    /deep/ chart {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

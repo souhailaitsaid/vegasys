@@ -1,0 +1,128 @@
+{
+    "messages": {
+        "deleted": "Element suprimmé",
+        "added": "Element ajouté",
+        "updated": "Element modifié"
+    },
+    "modals":{
+        "confirm-delete" : {
+            "btn":"Confirmer",
+            "header":"Confirmation de supression",
+            "body":" Êtes-vous sûr de vouloir supprimer cet élement"
+        }
+    },
+    "common": {
+        "id": "ID",
+        "label": "Libelle",
+        "description": "Description",
+        "btn":{
+            "save":"Sauvgarder"
+        },
+        "menu": {
+            "config": "Configuration",
+            "dashboard": "Tableau de bord",
+            "fournisseur": "Fournisseurs",
+            "personnel": "Personnels",
+            "classifications": "Classifications",
+            "familles": "Familles",
+            "type-equips": "Type d'equipements",
+            "compteurs": "Compteurs",
+            "origines": "Origines",
+            "occurences": "Occurences",
+            "criticites": "Criticités",
+            "services": "Services",
+            "bon-travail": "Bon de travail",
+            "demande-travail": "demande de travail",
+            "statut-demande-travails":"Statut des demande tr.",
+            "mode-gestions":"Modes de gestion",
+            "unites-compteurs": "Unites de compteur",
+            "type-travails": "Types de travail",
+            "etat-installations": "Etats d'installation"
+        }
+    },
+    "classification": {
+        "list": "Liste des classifications"
+    },
+    "famille": {
+        "list": "Liste des familles"
+    },
+    "type-equipement": {
+        "list": "Liste des types d'équipements"
+    },
+    "compteur": {
+        "list": "Liste des compteurs",
+        "form": "Ajouter/Modifier un compteur",
+        "unite-compteur":"Unité compteur"
+    },
+    "occurence": {
+        "list": "Liste des occurences"
+    },
+    "criticite": {
+        "list": "Liste des criticités"
+    },
+    "service": {
+        "list": "Liste des services"
+    },
+    "origine": {
+        "list": "Liste des origines"
+    },
+    "unite-compteur": {
+        "list": "Liste Unites de compteurs"
+    },
+    "etat-installation": {
+        "list": "Liste états d' installation"
+    },
+    "type-travail": {
+        "list": "Liste des types de travail",
+        "occurence": "Occurence",
+        "form": "Ajouter/Modifier un type de travail"
+    },
+    "personnel": {
+        "list": "Liste de personnels",
+        "code": "Code",
+        "prenom": "Prénom",
+        "nom": "Nom"
+    },
+    "bon-travail": {
+        "list": "Liste des bons de travail",
+        "statutDemandeTravail": "statut DT",
+        "typeTravail": "Type de travail",
+        "etatInstallation": "Etat d'installation ",
+        "urgent":"Urgent",
+        "remarque":"remarque",
+        "dureeArretMachine":"Durée arrêt machine",
+        "nomMachine":"Nom machine",
+        "form": "Ajouter/Modifier un type de travail"
+    },
+    "mode-gestion": {
+        "list": "Liste des modes de gestion"
+    },
+    "statut-demande-travail": {
+        "list": "Liste des statut de demande de travail"
+    },
+    "fournisseur": {
+        "list": "Liste des fournisseur",
+        "nomFournisseur": "Nom fournisseur",
+        "nomContact": "Nom contact",
+        "telContact": "Tel contact",
+        "adresse": "Adresse",
+        "codePostal": "Code postal",
+        "ville": "Ville",
+        "telephone": "Téléphone",
+        "telecopie": "Télécopie",
+        "remarque": "Remarque"
+
+    },
+    "demande-travail": {
+        "list": "Liste des demandes de travail",
+        "statutDemandeTravail": "statut DT",
+        "typeTravail": "Type de travail",
+        "etatInstallation": "Etat d'installation ",
+        "urgent":"Urgent",
+        "remarque":"Remarque",
+        "semainePromise":"Semaine promise",
+        "dureeArretMachine":"Durée arrêt machine",
+        "nomMachine":"Nom machine",
+        "form": "Ajouter/Modifier une demande de travail"
+    }
+}

@@ -1,0 +1,20 @@
+[
+    {
+        "env": "You can add as many env definition blocks as needed, they will be checked at runtime. Based on the IP or hostName it will detect which environmen should be loaded ",
+        "ip": "Put the IP without the protocol in here. Eg: '10.20.30.40' Leave empty if not needed",
+        "hostName": "Put the hostName without the protocol and domain name in here. Eg: 'vts-scheldt'. Leave empty if not known",
+        "configFile": "app-config-ENV.json, file will be searched in /assets/config folder "
+    },
+    {
+        "env": "PROD",
+        "ip": "",
+        "hostName": "chu-maintenance.herokuapp.com",
+        "configFile": "app-config-PROD.json"
+    },
+    {
+        "env": "DEV",
+        "ip": "127.0.0.1",
+        "hostName": "localhost",
+        "configFile": "app-config-DEV.json"
+    }    
+]

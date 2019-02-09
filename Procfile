@@ -1,0 +1,1 @@
+web java -Dserver.port=$PORT -jar GMAO-BACKEND/target/GMAO-BACKEND-1.jar
