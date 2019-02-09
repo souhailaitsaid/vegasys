@@ -4,13 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { AbstractRestService } from './abstract-rest.service';
 
-export const URI = '/classifications'
+export const URI = '/categories'
 
 @Injectable({
   providedIn: 'root'
 }
 )
-export class ClassificationService  extends AbstractRestService<any>{
+export class CategoryService  extends AbstractRestService<any>{
   constructor(private http:HttpClient, private appConfig: AppConfig) {
     super(appConfig,http,URI);
   }
