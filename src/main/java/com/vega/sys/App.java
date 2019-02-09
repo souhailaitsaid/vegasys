@@ -1,4 +1,4 @@
-package com.proxymed.gma;
+package com.vega.sys;
 
 /**
  * Hello world!
