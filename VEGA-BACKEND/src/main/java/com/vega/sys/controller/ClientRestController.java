@@ -48,13 +48,6 @@ public class ClientRestController {
 
 	}
 	
-	@GetMapping("/all")
-	@Cacheable()
-	public List<String> clients() throws InterruptedException {
-		
-	return Arrays.asList("X","Y","E");
-
-	}
 	
 	@CacheEvict(allEntries = true)
 	@PostMapping()

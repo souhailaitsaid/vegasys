@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <nb-card>
+      <nb-card-header>{{'client.form' | translate}}</nb-card-header>
+      <nb-card-body>
+        <form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="row">
+
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>{{'client.clientName' | translate}}</label>
+                <input type="text" formControlName="clientName" class="form-control" placeholder="{{'client.clientName' | translate}}">
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>{{'client.email' | translate}}</label>
+                <input type="text" formControlName="email" class="form-control" placeholder="{{'client.email' | translate}}">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>{{'client.phoneNumber' | translate}}</label>
+                <input type="number" formControlName="phoneNumber" class="form-control" placeholder="{{'client.phoneNumber' | translate}}">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>{{'common.description' | translate}}</label>
+                <textarea formControlName="description" class="form-control" placeholder="{{'common.description' | translate}}"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+
+                <button type="submit" [disabled]="!form.valid" class="btn btn-primary">{{'common.btn.save' |
+                  translate}}</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="full-width">
+      <nb-card-header>
+        {{'client.list' | translate}}
+      </nb-card-header>
+      <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+          (userRowSelect)="onUserRowSelect($event)">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+<toaster-container [toasterconfig]="config"></toaster-container>

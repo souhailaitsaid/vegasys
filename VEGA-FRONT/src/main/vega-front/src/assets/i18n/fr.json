@@ -21,6 +21,7 @@
         },
         "menu": {
             "config": "Configuration",
+            "clients": "Clients",
             "dashboard": "Tableau de bord",
             "categories": "catégories"
         }
@@ -28,6 +29,14 @@
     "category": {
         "list": "Liste des catégories",
         "categoryName":"Nom de catégorie"
+    },
+    "client": {
+        "form": "Formulaire d'ajout/modification d'un client",
+        "list": "Liste des clients",
+        "clientName":"Nom de client",
+        "email":"Email",
+        "phoneNumber":"Téléphone"
+
     }
  
 }

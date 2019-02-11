@@ -91,8 +91,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.proxymed.gma</groupId>
-			<artifactId>GMAO-FRONT</artifactId>
+			<groupId>com.vega.sys</groupId>
+			<artifactId>VEGA-FRONT</artifactId>
 			<version>${project.version}</version>
 			<scope>runtime</scope>
 		</dependency>

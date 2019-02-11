@@ -15,10 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 @SpringBootApplication
 @EnableCaching
-public class GmaoApplication {
+public class Vega {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GmaoApplication.class, args);
+		SpringApplication.run(Vega.class, args);
 	}
 	
 	@Bean
