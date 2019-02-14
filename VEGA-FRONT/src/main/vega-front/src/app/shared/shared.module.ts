@@ -7,6 +7,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ConfirmModalComponent } from '../common/modal/confirm-modal/confirm-modal.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
 
@@ -16,6 +17,7 @@ import { ConfirmModalComponent } from '../common/modal/confirm-modal/confirm-mod
     TranslateModule,
     NgxDatatableModule,
     Ng2SmartTableModule,
+    NgSelectModule
     
   ],
   declarations: [ConfirmModalComponent]

@@ -18,6 +18,7 @@ import { CategoryService } from '../../@core/data/category.service';
 export class ClientComponent implements OnInit {
 
   public categories: any[]
+  public selectedCategories : any[]
   settings;
   config: ToasterConfig;
   form: FormGroup

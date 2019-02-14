@@ -33,6 +33,15 @@
                 <textarea formControlName="description" class="form-control" placeholder="{{'common.description' | translate}}"></textarea>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <ng-select [items]="categories" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"
+                    bindLabel="categoryName" placeholder="Select people" [(ngModel)]="selectedCategories" [ngModelOptions]="{standalone: true}">
+                  </ng-select>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="row">
