@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <span>{{ modalHeader }}</span>
+  <button class="close" aria-label="Close" (click)="dismissModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="col-md-12">
+    <!--  <nb-card class="full-width">
+            <nb-card-header>
+              {{'page.list' | translate : {name: client?.clientName} }}
+            </nb-card-header>
+            <nb-card-body>
+              <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (custom)="onCustom($event)">
+              </ng2-smart-table>
+            </nb-card-body>
+          </nb-card>-->
+
+    <nb-card size="medium">
+      <nb-card-header>
+        {{'page.list' | translate : {name: client?.clientName} }}
+      </nb-card-header>
+      <nb-list>
+        <nb-list-item *ngFor="let element of catalog?.pages">
+          <div class="row">
+          <div class="col-4 text-left">{{ element.number }}</div>
+          <div class="col-4 text-left">{{ element.filePath }}</div>
+          <div class="col-4 text-right">
+            <div class="btn-group btn-group-sm" role="group">
+              <button class="btn btn-sm btn-danger" (click)="remove(element)"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-sm btn-success" (click)="edit(element)"><i class="fa fa-edit"></i></button>
+            </div>
+          </div>
+        </div>
+
+        </nb-list-item>
+      </nb-list>
+    </nb-card>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-md btn-primary" (click)="closeModal()">{{ modalBtn }}</button>
+</div>

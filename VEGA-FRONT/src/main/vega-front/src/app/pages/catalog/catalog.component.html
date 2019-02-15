@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-md-3">
+
+    <nb-card>
+      <!--<nb-card-header>{{'catalog.form' | translate}}</nb-card-header>-->
+      <nb-card-header>Selected range: {{ range.start | date }} - {{ range.end | date }}</nb-card-header>
+      <nb-card-body>
+
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="form-group">
+              <nb-calendar-range [(range)]="range" size="large">
+              </nb-calendar-range>
+            </div>
+          </div>
+        </div>
+        <!--form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>{{'catalog.debut' | translate}}</label>
+                  <input type="text" formControlName="debut" class="form-control" placeholder="{{'client.debut' | translate}}">
+                </div>
+              </div>
+  
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>{{'catalog.fin' | translate}}</label>
+                  <input type="text" formControlName="fin" class="form-control" placeholder="{{'client.fin' | translate}}">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2">
+                <div class="form-group">
+  
+                  <button type="submit" [disabled]="!form.valid" class="btn btn-primary">{{'common.btn.save' |
+                    translate}}</button>
+                </div>
+              </div>
+            </div>
+          </form>-->
+
+
+        <div class="row">
+          <div class="col-md-12  text-center">
+            <div class="form-group">
+
+              <button (click)="onSubmit()" [disabled]="!isValidRange()" class="btn btn-primary">
+                <ng-container *ngIf="!isEdit()">{{'common.btn.saveAdd' | translate}}</ng-container> 
+                <ng-container *ngIf="isEdit()">{{'common.btn.saveEdit' | translate}}</ng-container> 
+              </button>
+            </div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+
+
+  <div class="col-md-9">
+    <nb-card class="full-width">
+      <nb-card-header>
+        {{'catalog.list' | translate : {name: client?.clientName} }}
+      </nb-card-header>
+      <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (custom)="onCustom($event)">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+</div>
+
+
+<toaster-container [toasterconfig]="config"></toaster-container>

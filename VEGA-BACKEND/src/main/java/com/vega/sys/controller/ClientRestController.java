@@ -61,7 +61,7 @@ public class ClientRestController {
 		return new ResponseEntity<Response>(new Response(true, message), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/find/{id}")
 	public ResponseEntity<Client> find(@PathVariable("id") Long id) throws InterruptedException {
 		
 		Client r = null;

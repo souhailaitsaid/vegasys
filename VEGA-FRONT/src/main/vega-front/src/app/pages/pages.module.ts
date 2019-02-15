@@ -6,6 +6,8 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { ConfigurationModule } from './configuration/configuration.module';
+import { ClientModule } from './client/client.module';
+import { CatalogModule } from './catalog/catalog.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -17,6 +19,8 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
+    ClientModule,
+    CatalogModule,
     ConfigurationModule,
     MiscellaneousModule,
   ],

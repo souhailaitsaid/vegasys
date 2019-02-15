@@ -5,7 +5,6 @@ import { ConfigurationComponent } from './configuration.component';
 import { ThemeModule } from '../../@theme/theme.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ToasterService } from 'angular2-toaster';
-import { ConfirmModalComponent } from '../../common/modal/confirm-modal/confirm-modal.component';
 import { CategoryComponent } from './category/category.component';
 
 
@@ -16,7 +15,6 @@ import { CategoryComponent } from './category/category.component';
     SharedModule
   ],
   providers: [ToasterService],
-  entryComponents: [ConfirmModalComponent],
   declarations: [
     ConfigurationComponent,
     CategoryComponent,

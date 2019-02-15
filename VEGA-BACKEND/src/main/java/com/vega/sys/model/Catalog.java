@@ -35,7 +35,7 @@ public class Catalog implements Persistable<Long>  {
 	@ManyToOne
 	private Client client;
 	
-	@JsonIgnore
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "catalog",cascade = CascadeType.PERSIST)
 	private List<Page> pages = new ArrayList<>();
 	
@@ -103,6 +103,14 @@ public class Catalog implements Persistable<Long>  {
 	
 	
 	
+	public Catalog(Long catalogId, Date debut, Date fin, Client client) {
+		super();
+		this.catalogId = catalogId;
+		this.debut = debut;
+		this.fin = fin;
+		this.client = client;
+	}
+
 	public Catalog() {
 		super();
 		// TODO Auto-generated constructor stub

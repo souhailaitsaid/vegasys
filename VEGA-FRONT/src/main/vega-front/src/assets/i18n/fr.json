@@ -9,7 +9,8 @@
             "btn":"Confirmer",
             "header":"Confirmation de supression",
             "body":" Êtes-vous sûr de vouloir supprimer cet élement"
-        }
+        },
+        "pageManagement" : "Gestion des pages du catalogue du: {{debut}}, au: {{fin}} pour le client {{name}}"
     },
     "common": {
         "id": "ID",
@@ -17,6 +18,8 @@
         "description": "Description",
         "btn":{
             "save":"Sauvgarder",
+            "saveAdd":"Ajouter",
+            "saveEdit":"Sauvgarder les modifications",
             "takeMeHome":"Retour à l'acceuil"
         },
         "menu": {
@@ -35,8 +38,18 @@
         "list": "Liste des clients",
         "clientName":"Nom de client",
         "email":"Email",
-        "phoneNumber":"Téléphone"
+        "phoneNumber":"Téléphone",
+        "categories":"Catégories"
+    },
 
+    "catalog": {
+        "form": "Formulaire d'ajout/modification d'un catalogue",
+        "list": "Liste des catalogs du client {{ name }}",
+        "debut":"Date debut",
+        "fin":"Date fin",
+        "phoneNumber":"Téléphone",
+        "pages":"Pages",
+        "nbrPages":"Nombre des pages"
     }
  
 }

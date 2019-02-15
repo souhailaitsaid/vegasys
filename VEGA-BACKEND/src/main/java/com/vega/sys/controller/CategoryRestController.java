@@ -61,7 +61,7 @@ public class CategoryRestController {
 		return new ResponseEntity<Response>(new Response(true, message), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/find/{id}")
 	public ResponseEntity<Category> find(@PathVariable("id") Long id) throws InterruptedException {
 		
 		Category r = null;

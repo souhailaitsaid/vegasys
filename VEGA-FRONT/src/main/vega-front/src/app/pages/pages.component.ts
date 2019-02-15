@@ -28,7 +28,7 @@ export class PagesComponent implements OnInit {
       },
       {
         title: this.translate.instant('common.menu.clients'),
-        icon: 'nb-user',
+        icon: 'nb-star',
         link: '/pages/clients',
       },
       {

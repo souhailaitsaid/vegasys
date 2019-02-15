@@ -5,21 +5,24 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ToasterModule } from 'angular2-toaster';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ConfirmModalComponent } from '../common/modal/confirm-modal/confirm-modal.component';
+import { NbSelectModule, NbCalendarRangeModule } from '@nebular/theme';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { PageModalComponent } from '../pages/catalog/page-modal/page-modal.component';
 @NgModule({
 
   exports: [
     CommonModule,
     ToasterModule,
     TranslateModule,
-    NgxDatatableModule,
     Ng2SmartTableModule,
-    NgSelectModule
+    NbSelectModule,
+    NgSelectModule,
+    NbCalendarRangeModule
     
   ],
+  
+  entryComponents: [ConfirmModalComponent],
   declarations: [ConfirmModalComponent]
 })
 export class SharedModule { }

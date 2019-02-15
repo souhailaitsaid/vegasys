@@ -21,3 +21,6 @@ export const TABLE_DELETE =
   deleteButtonContent: '<i class="nb-trash"></i>',
   confirmDelete: true,
 }
+
+export const TABLE_EDIT_CUSTOM =
+ { name: 'custom', title: '<i class="nb-compose"></i>' }

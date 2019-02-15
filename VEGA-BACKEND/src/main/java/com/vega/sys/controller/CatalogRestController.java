@@ -46,7 +46,21 @@ public class CatalogRestController {
 		return new ResponseEntity<List<Catalog>>(list, HttpStatus.OK);
 
 	}
-	
+
+	@GetMapping("/client/{id}")
+	@Cacheable()
+	public ResponseEntity<List<Catalog>> byClientId(@PathVariable("id") Long id) throws InterruptedException {
+		
+		List<Catalog> list = null;
+		try {
+			list = catalogRepository.findByClientClientId(id,SORTING_DESC);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<Catalog>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<Catalog>>(list, HttpStatus.OK);
+
+	}
 	
 	@CacheEvict(allEntries = true)
 	@PostMapping()
@@ -61,7 +75,7 @@ public class CatalogRestController {
 		return new ResponseEntity<Response>(new Response(true, message), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/find/{id}")
 	public ResponseEntity<Catalog> find(@PathVariable("id") Long id) throws InterruptedException {
 		
 		Catalog r = null;

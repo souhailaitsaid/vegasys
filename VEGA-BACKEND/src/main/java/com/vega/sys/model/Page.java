@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.data.domain.Persistable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Page implements Persistable<Long> {
 	/**
@@ -19,7 +21,7 @@ public class Page implements Persistable<Long> {
 	private Long pageId;
 	private Integer number;
 	private String filePath;
-	
+	@JsonIgnore
 	@ManyToOne
 	Catalog catalog;
 

@@ -9,7 +9,6 @@ export abstract class AbstractRestService<T> {
 
   constructor(private config: AppConfig, protected _http: HttpClient, protected actionUrl:string){
     this.api_root = this.config.getConfig()
-    console.log(this.api_root)
   }
 
   findAll() :Observable<any> {

@@ -9,7 +9,7 @@ import {
   NbThemeService,
 } from '@nebular/theme';
 
-import { StateService } from '../../../@core/data/state.service';
+import { StateService } from '../../../@core/utils';
 
 // TODO: move layouts into the framework
 @Component({
@@ -27,7 +27,7 @@ import { StateService } from '../../../@core/data/state.service';
                    [end]="sidebar.id === 'end'">
         <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
           <a href="#" class="btn btn-hero-success main-btn">
-            <i class="ion ion-social-github"></i> <span>VEGASYS</span>
+            <i class="ion ion-social-github"></i> <span>Support Us</span>
           </a>
         </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
@@ -57,6 +57,7 @@ import { StateService } from '../../../@core/data/state.service';
         <ngx-theme-settings></ngx-theme-settings>
       </nb-sidebar>
     </nb-layout>
+    <ngx-toggle-settings-button></ngx-toggle-settings-button>
   `,
 })
 export class SampleLayoutComponent implements OnDestroy {

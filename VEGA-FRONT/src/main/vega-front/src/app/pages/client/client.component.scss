@@ -1,5 +1,4 @@
 @import '../../@theme/styles/themes';
-
 @include nb-install-component() {
   .full-width {
     flex: 1;
@@ -21,4 +20,34 @@
 
 .customised-control .customised-checkbox{
   margin: 10px;
+}
+
+.ng-select.custom {
+  border:0px;
+  min-height: 0px;
+  border-radius: 0;
+}
+.ng-select.custom .ng-control  {            
+  min-height: 0px;
+  border-radius: 0;
+}
+
+
+:host /deep/ ng2-st-tbody-edit-delete {display: flex !important;
+  height: 0 !important;
+}
+
+:host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+:host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+  color: #5dcfe3;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option{
+  color: #5dcfe3;
 }

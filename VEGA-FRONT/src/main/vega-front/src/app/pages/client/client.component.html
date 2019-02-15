@@ -6,8 +6,6 @@
       <nb-card-body>
         <form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="row">
-
-
             <div class="col-md-3">
               <div class="form-group">
                 <label>{{'client.clientName' | translate}}</label>
@@ -29,21 +27,23 @@
             </div>
             <div class="col-md-3">
               <div class="form-group">
-                <label>{{'common.description' | translate}}</label>
-                <textarea formControlName="description" class="form-control" placeholder="{{'common.description' | translate}}"></textarea>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <div class="form-group">
-                  <ng-select [items]="categories" [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"
-                    bindLabel="categoryName" placeholder="Select people" [(ngModel)]="selectedCategories" [ngModelOptions]="{standalone: true}">
-                  </ng-select>
-                </div>
+
+                <label>{{'client.categories' | translate}}</label>
+                <ng-select class="custom" [items]="categories | async" [multiple]="true" [closeOnSelect]="false"  [hideSelected]="true"
+                  [searchable]="true" bindLabel="categoryName" placeholder="Select categories" formControlName="categories">
+                </ng-select>
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>{{'common.description' | translate}}</label>
+                <textarea formControlName="description" class="form-control" placeholder="{{'common.description' | translate}}"></textarea>
+              </div>
 
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-2">
               <div class="form-group">
@@ -66,7 +66,7 @@
       </nb-card-header>
       <nb-card-body>
         <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
-          (userRowSelect)="onUserRowSelect($event)">
+          (custom)="onCustom($event)">
         </ng2-smart-table>
       </nb-card-body>
     </nb-card>

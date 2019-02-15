@@ -1,0 +1,43 @@
+
+@import '../../../@theme/styles/themes';
+@include nb-install-component() {
+  .full-width {
+    flex: 1;
+    min-width: 220px;
+  }
+
+  nb-checkbox {
+  }
+
+  .form-inline > * {
+    @include nb-ltr(margin, 0 1.5rem 1.5rem 0);
+    @include nb-rtl(margin, 0 0 1.5rem 1.5rem);
+  }
+
+  nb-card.inline-form-card nb-card-body {
+    padding-bottom: 0;
+  }
+
+  .customised-control .customised-checkbox{
+    margin: 10px;
+  }
+  
+  :host /deep/ ng2-st-tbody-edit-delete {display: flex !important;
+      height: 0 !important;
+    }
+    
+    :host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+      display: inline-block;
+      width: 50px;
+      text-align: center;
+      font-size: 1.1em;
+    }
+    
+    :host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+      color: #5dcfe3;
+    }
+    
+    .ng-dropdown-panel .ng-dropdown-panel-items .ng-option{
+      color: #5dcfe3;
+    }
+}

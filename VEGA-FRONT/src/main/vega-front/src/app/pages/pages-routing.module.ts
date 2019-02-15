@@ -5,6 +5,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 import { ClientComponent } from './client/client.component';
+import { CatalogComponent } from './catalog/catalog.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +18,10 @@ const routes: Routes = [{
     {
       path: 'clients',
       component: ClientComponent,
+    },
+    {
+      path: 'catalogs/client/:id',
+      component: CatalogComponent,
     },
   /*  {
       path: 'bon-travail',

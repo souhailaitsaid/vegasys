@@ -31,7 +31,7 @@ public class Client implements Persistable<Long>  {
 	String clientName;
 	String description;
 	String email;
-	Integer phoneNumber;
+	Long phoneNumber;
 	
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client",cascade = CascadeType.PERSIST)
@@ -124,11 +124,11 @@ public class Client implements Persistable<Long>  {
 		this.email = email;
 	}
 
-	public Integer getPhoneNumber() {
+	public Long getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -137,7 +137,7 @@ public class Client implements Persistable<Long>  {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Client(Long clientId, String clientName, String description, String email, Integer phoneNumber) {
+	public Client(Long clientId, String clientName, String description, String email, Long phoneNumber) {
 		super();
 		this.clientId = clientId;
 		this.clientName = clientName;
@@ -145,6 +145,19 @@ public class Client implements Persistable<Long>  {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 	}
+
+	public Client(Long clientId, String clientName, String description, String email, Long phoneNumber,
+			Set<Category> categories) {
+		super();
+		this.clientId = clientId;
+		this.clientName = clientName;
+		this.description = description;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.categories = categories;
+	}
+	
+	
 
 	
 

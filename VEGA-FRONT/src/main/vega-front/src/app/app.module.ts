@@ -14,9 +14,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ThemeModule } from './@theme/theme.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppConfig } from './app.config';
+import { TranslateModule, TranslateLoader,  } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -25,13 +25,19 @@ export function createTranslateLoader(http: HttpClient) {
 export function initConfig(config: AppConfig) {
   return () => config.loadAppConfig();
 }
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule,
+
+    NgbModule.forRoot(),
+    ThemeModule.forRoot(),
+    CoreModule.forRoot(),
+
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -39,10 +45,6 @@ export function initConfig(config: AppConfig) {
         deps: [HttpClient]
       }
     }),
-    AppRoutingModule,
-    NgbModule.forRoot(),
-    ThemeModule.forRoot(),
-    CoreModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [
