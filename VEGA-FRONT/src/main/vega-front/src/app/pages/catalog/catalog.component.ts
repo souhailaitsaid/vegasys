@@ -114,8 +114,8 @@ export class CatalogComponent implements OnInit {
     activeModal.componentInstance.catalog = event.data
     activeModal.componentInstance.modalBtn = this.translate.instant('modals.dismiss');
     activeModal.result.then((data) => {
-      // this.delete(id, event)
     }, (reason) => {
+      this.getAll(this.client.clientId)
       console.log('activeModal.result.dismiss')
     });
   }

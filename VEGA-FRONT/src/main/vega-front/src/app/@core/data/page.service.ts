@@ -5,19 +5,19 @@ import { AppConfig } from '../../app.config';
 import { AbstractRestService } from './abstract-rest.service';
 import { Observable } from 'rxjs';
 
-export const URI = '/catalogs'
+export const URI = '/pages'
 
 @Injectable({
   providedIn: 'root'
 }
 )
-export class CatalogService  extends AbstractRestService<any>{
+export class PageService  extends AbstractRestService<any>{
   constructor(private http:HttpClient, private appConfig: AppConfig) {
     super(appConfig,http,URI);
   }
 
-  findAllByClientId(id: number): Observable<any>  {
-    return this.http.get(this.api_root+URI+'/client/' + + `${id}`)
+  findAllByCatalogId(id: number): Observable<any>  {
+    return this.http.get(this.api_root+URI+'/catalog/' + + `${id}`)
   }
 
 

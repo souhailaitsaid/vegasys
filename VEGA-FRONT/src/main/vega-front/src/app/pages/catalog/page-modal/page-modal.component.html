@@ -20,24 +20,34 @@
       <nb-card-header>
         {{'page.list' | translate : {name: client?.clientName} }}
       </nb-card-header>
-      <nb-list>
-        <nb-list-item *ngFor="let element of catalog?.pages">
+      <nb-list *ngIf="pages">
+          <nb-list-item >
+              <div class="row">
+                <div class="col-4 text-left">Page number</div>
+                <div class="col-4 text-left">Page path</div>
+                <div class="col-4 text-right">
+                 Action
+              </div>
+            </div>
+            </nb-list-item>
+        <nb-list-item *ngFor="let element of pages">
           <div class="row">
-          <div class="col-4 text-left">{{ element.number }}</div>
-          <div class="col-4 text-left">{{ element.filePath }}</div>
-          <div class="col-4 text-right">
-            <div class="btn-group btn-group-sm" role="group">
-              <button class="btn btn-sm btn-danger" (click)="remove(element)"><i class="fa fa-trash"></i></button>
-              <button class="btn btn-sm btn-success" (click)="edit(element)"><i class="fa fa-edit"></i></button>
+            <div class="col-4 text-left">{{ element.number }}</div>
+            <div class="col-4 text-left">{{ element.filePath }}</div>
+            <div class="col-4 text-right">
+              <div class="btn-group btn-group-sm" role="group">
+                <button class="btn btn-sm btn-success" (click)="edit(element)"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-sm btn-danger" (click)="showDeleteModal(element.pageId)"><i class="fa fa-trash"></i></button>
+              </div>
             </div>
           </div>
-        </div>
 
         </nb-list-item>
+        <ng-container *ngIf="!pages && pages.length ==0">no item available</ng-container>
       </nb-list>
     </nb-card>
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-md btn-primary" (click)="closeModal()">{{ modalBtn }}</button>
+  <button class="btn btn-md btn-primary" (click)="dismissModal()">{{ modalBtn }}</button>
 </div>

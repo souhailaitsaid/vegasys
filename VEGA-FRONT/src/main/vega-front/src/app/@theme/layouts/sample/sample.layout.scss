@@ -109,7 +109,7 @@
     }
 
     /deep/ nb-menu {
-      & > .menu-items {
+    /*  & > .menu-items {
         & > .menu-item:first-child {
           .menu-title {
             &::after {
@@ -123,8 +123,8 @@
             }
           }
         }
-      }
-
+      }*/
+ 
       .nb-e-commerce {
         font-size: 2rem;
       }
