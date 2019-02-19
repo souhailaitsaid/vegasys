@@ -71,6 +71,11 @@ public class InitDataLoader implements ApplicationRunner {
 		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
+		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
+		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
+		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
+		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
+		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
 		Catalog ca2 =catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca2));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca2));

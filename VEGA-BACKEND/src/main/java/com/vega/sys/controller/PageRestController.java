@@ -62,7 +62,7 @@ public class PageRestController {
 
 	}
 	
-	@CacheEvict(allEntries = true)
+	@CacheEvict(value = { "pages", "catalogs" },allEntries = true)
 	@PostMapping()
 	public ResponseEntity<Response> save(@RequestBody Page page, UriComponentsBuilder builder) {
 		String message = page.getId()!=null ?  "messages.updated" : "messages.added";
@@ -87,7 +87,7 @@ public class PageRestController {
 		return new ResponseEntity<Page>(r, HttpStatus.OK);
 	}
 	
-	@CacheEvict(allEntries = true)
+	@CacheEvict(value = { "pages", "catalogs" },allEntries = true)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Response> delete(@PathVariable("id") Long id) {
 		try {
