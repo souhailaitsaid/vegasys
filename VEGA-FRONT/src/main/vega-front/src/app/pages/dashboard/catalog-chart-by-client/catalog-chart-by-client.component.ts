@@ -1,28 +1,29 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NbThemeService, NbColorHelper } from '@nebular/theme';
 import { DashboardService } from '../../../@core/data/dashboard.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
 @Component({
-  selector: 'bt-chart-by-status',
+  selector: 'catalog-chart-by-client',
   template: `
     <chart type="bar" [data]="data" [options]="options"></chart>
   `,
 })
 
-export class BtChartByStatusComponent implements OnDestroy {
+export class CatalogChartByClientComponent implements OnDestroy {
   data: any;
   options: any;
   themeSubscription: any;
 
-  constructor(private theme: NbThemeService, private dashboard: DashboardService) {
+  constructor(private theme: NbThemeService, private dashboard: DashboardService, private translate : TranslateService) {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       const chartjs: any = config.variables.chartjs;
-      this.dashboard.getBtByStatus().subscribe(
+      this.dashboard.getCatalogsByClient().subscribe(
         response => {
-          console.log('getBtByStatus')
+          console.log('getCatalogsByClient')
           this.buildChart(response, colors, chartjs);
         }
       );
@@ -38,7 +39,7 @@ export class BtChartByStatusComponent implements OnDestroy {
       labels: labels,
       datasets: [{
         data: Object.values(data),//.map(x => x[0] / this.unit),
-        label: 'BT by Status',
+        label: this.translate.instant('dashboard.nbrCatalogs'),
         backgroundColor: NbColorHelper.hexToRgbA(colors.primaryLight, 0.8),
       }],
     };

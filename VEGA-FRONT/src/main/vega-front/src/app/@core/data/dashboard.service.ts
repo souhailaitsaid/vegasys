@@ -16,8 +16,8 @@ export class DashboardService {
   }
 
 
-  getBtByStatus(): Observable<any> {
-    return this.http.get(this.root + '/bonTravails/byStatus');
+  getCatalogsByClient(): Observable<any> {
+    return this.http.get(this.root + '/catalogs/catalogsByClient');
   }
   getDtByStatus(): Observable<any> {
     return this.http.get(this.root + '/demandeTravails/byStatus');

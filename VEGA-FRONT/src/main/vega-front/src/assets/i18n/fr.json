@@ -2,7 +2,10 @@
     "messages": {
         "deleted": "Element suprimmé",
         "added": "Element ajouté",
-        "updated": "Element modifié"
+        "updated": "Element modifié",
+        "client": {
+            "unique":"Nom client ou email déja existant"
+        }
     },
     "modals":{
         "confirm-delete" : {
@@ -10,7 +13,8 @@
             "header":"Confirmation de supression",
             "body":" Êtes-vous sûr de vouloir supprimer cet élement"
         },
-        "pageManagement" : "Gestion des pages du catalogue du: {{debut}}, au: {{fin}} pour le client {{name}}"
+        "pageManagement" : "Gestion des pages du catalogue du: {{debut}}, au: {{fin}} pour le client {{name}}",
+        "close":"Fermer"
     },
     "common": {
         "id": "ID",
@@ -29,6 +33,10 @@
             "categories": "catégories"
         }
     },
+    "dashboard":{
+        "nbrCatalogsByClient":"Nombre de catalogues par client",
+        "nbrCatalogs":"Nbr de catalogues"
+    },
     "category": {
         "list": "Liste des catégories",
         "categoryName":"Nom de catégorie"
@@ -43,13 +51,15 @@
     },
 
     "catalog": {
+        "range":"Plage de dates",
         "form": "Formulaire d'ajout/modification d'un catalogue",
         "list": "Liste des catalogs du client {{ name }}",
         "debut":"Date debut",
         "fin":"Date fin",
         "phoneNumber":"Téléphone",
         "pages":"Pages",
-        "nbrPages":"Nombre des pages"
+        "nbrPages":"Nombre des pages",
+        "description":"Description du catalogue"
     }
  
 }

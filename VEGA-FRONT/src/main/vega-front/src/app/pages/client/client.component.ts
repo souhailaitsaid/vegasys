@@ -85,9 +85,14 @@ export class ClientComponent implements OnInit {
       }
       this.service.save(element).subscribe(
         response => {
+          if(response.success){
+            this.showToast('success', this.translate.instant(response.message), '')
+          }else{
+            this.showToast('warning', this.translate.instant(response.message), '')
+          }
           this.reset();
           this.getAll();
-          this.showToast('success', this.translate.instant(response.message), '')
+         
         },
         error => this.showToast('error', this.translate.instant('messages.server-error'), '')
       );

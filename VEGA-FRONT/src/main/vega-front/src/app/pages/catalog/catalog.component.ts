@@ -71,6 +71,7 @@ export class CatalogComponent implements OnInit {
     this.settings = this.getSettings()
     this.form = new FormGroup({
       catalogId: new FormControl(),
+      description : new FormControl(),
     });
   }
 
@@ -112,10 +113,10 @@ export class CatalogComponent implements OnInit {
     activeModal.componentInstance.modalHeader = this.translate.instant('modals.pageManagement', 
     { debut: this.datePipe.transform(event.data.debut, 'dd-MMM-yyyy'), fin: this.datePipe.transform(event.data.fin, 'dd-MMM-yyyy'), name: event.data.client.clientName });
     activeModal.componentInstance.catalog = event.data
-    activeModal.componentInstance.modalBtn = this.translate.instant('modals.dismiss');
+    activeModal.componentInstance.modalBtn = this.translate.instant('modals.close');
     activeModal.result.then((data) => {
     }, (reason) => {
-      this.getAll(this.client.clientId)
+      //this.getAll(this.client.clientId)
       console.log('activeModal.result.dismiss')
     });
   }
@@ -124,9 +125,10 @@ export class CatalogComponent implements OnInit {
     if (this.isValidRange) {
       let element: any = {
         catalogId: this.form.controls['catalogId'].value,
+        description :this.form.controls['description'].value,
         debut: this.range.start,
         fin: this.range.end,
-        client: this.client
+        client: this.client,
       }
       this.service.save(element).subscribe(
         response => {
@@ -151,6 +153,7 @@ export class CatalogComponent implements OnInit {
     }
     this.form.patchValue({
       catalogId: event.data.catalogId,
+      description : event.data.description
     });
   }
   onDeleteConfirm(event): void {
@@ -227,6 +230,10 @@ export class CatalogComponent implements OnInit {
           title: this.translate.instant('common.id'),
           type: 'number',
         },
+        description: {
+          title: this.translate.instant('common.description'),
+          type: 'number',
+        },
         debut: {
           title: this.translate.instant('catalog.debut'),
           type: 'string',
@@ -260,7 +267,7 @@ export class CatalogComponent implements OnInit {
           }
         },
 
-        pages: {
+       /* pages: {
           title: this.translate.instant('catalog.nbrPages'),
           type: 'string',
           valuePrepareFunction: (data) => {
@@ -271,7 +278,7 @@ export class CatalogComponent implements OnInit {
               return search == cell.length
             }
           }
-        },
+        },*/
 
         /* categories: {
            title: this.translate.instant('client.categories'),
