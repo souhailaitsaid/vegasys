@@ -17,7 +17,11 @@ export class PageService  extends AbstractRestService<any>{
   }
 
   findAllByCatalogId(id: number): Observable<any>  {
-    return this.http.get(this.api_root+URI+'/catalog/' + + `${id}`)
+    return this.http.get(this.api_root+URI+'/catalog/' + `${id}`)
+  }
+
+  getFiles(clientId :string, catalogId : string): Observable<any> {
+    return this.http.get(this.api_root+'/getallfiles/'+ `${clientId}`+'/'+`${catalogId}`)
   }
 
 

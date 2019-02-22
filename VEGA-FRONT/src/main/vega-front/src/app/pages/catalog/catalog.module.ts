@@ -5,11 +5,13 @@ import { SharedModule } from '../../shared/shared.module';
 import { ThemeModule } from '../../@theme/theme.module';
 import { PageModalComponent } from './page-modal/page-modal.component';
 
+import { NgxGalleryModule } from 'ngx-gallery';
 @NgModule({
   declarations: [CatalogComponent, PageModalComponent],
   imports: [
     ThemeModule,
     SharedModule,
+    NgxGalleryModule,
   ],
   entryComponents: [PageModalComponent],
 })

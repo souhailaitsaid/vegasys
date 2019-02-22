@@ -27,6 +27,7 @@ public class Catalog implements Persistable<Long>  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long catalogId;
+	String description;
 	@Temporal(TemporalType.DATE)
 	Date debut;
 	@Temporal(TemporalType.DATE)
@@ -39,6 +40,13 @@ public class Catalog implements Persistable<Long>  {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "catalog",cascade = CascadeType.PERSIST)
 	private List<Page> pages = new ArrayList<>();
 	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public Date getDebut() {
 		return debut;
@@ -103,12 +111,13 @@ public class Catalog implements Persistable<Long>  {
 	
 	
 	
-	public Catalog(Long catalogId, Date debut, Date fin, Client client) {
+	public Catalog(Long catalogId, Date debut, Date fin, Client client,String description) {
 		super();
 		this.catalogId = catalogId;
 		this.debut = debut;
 		this.fin = fin;
 		this.client = client;
+		this.description = description;
 	}
 
 	public Catalog() {

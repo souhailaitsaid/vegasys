@@ -49,23 +49,33 @@ public class InitDataLoader implements ApplicationRunner {
 				"Carrefour@Carrefour.Carrefour", 212606546569L, new HashSet<>(Arrays.asList(c1, c5, c4, c6))));
 		Client cl3 = clientRepository.save(new Client(null, "Asima", "Asima vente gros & particulier",
 				"Asima@Asima.Asima", 2128888869L, new HashSet<>(Arrays.asList(c3, c4, c5, c6))));
+		
+		Client cl4 = clientRepository.save(new Client(null, "Electro Planet", "Electro Planet vente gros & particulier",
+				"Electro@Electro.Electro", 2128888869L, new HashSet<>(Arrays.asList(c3, c4, c5, c6))));
+		
+		Client cl5 = clientRepository.save(new Client(null, "Atakadaw", "Atakadaw vente gros & particulier",
+				"Atakadaw@Atakadaw.Atakadaw", 2128888869L, new HashSet<>(Arrays.asList(c3, c4, c5, c6))));
+		
+		Client cl6 = clientRepository.save(new Client(null, "Planet Sport", "Planet sport vente gros & particulier",
+				"Planet@sport.Planet", 2128888869L, new HashSet<>(Arrays.asList(c3, c4, c5, c6))));
 
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl1));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl1));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl1));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl1));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl1,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl1,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl1,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl1,"Catalog description"));
 
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl2,"Catalog description"));
 
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3));
-		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3));
-		Catalog ca1 =catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3,"Catalog description"));
+		Catalog ca1 =catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3,"Catalog description"));
+		/*pageRepository.save(new Page(null, 1, "path1/path1", ca1));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
@@ -74,20 +84,42 @@ public class InitDataLoader implements ApplicationRunner {
 		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
-		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
-		pageRepository.save(new Page(null, 1, "path1/path1", ca1));
-		Catalog ca2 =catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3));
-		pageRepository.save(new Page(null, 1, "path1/path1", ca2));
-		pageRepository.save(new Page(null, 1, "path1/path1", ca2));
-		Catalog ca3 =catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3));
+		pageRepository.save(new Page(null, 1, "path1/path1", ca1));*/
+		Catalog ca2 =catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3,"Catalog description"));
+		/*pageRepository.save(new Page(null, 1, "path1/path1", ca2));
+		pageRepository.save(new Page(null, 1, "path1/path1", ca2));*/
+		Catalog ca3 =catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3,"Catalog description"));
+		/*pageRepository.save(new Page(null, 1, "path1/path1", ca3));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca3));
-		pageRepository.save(new Page(null, 1, "path1/path1", ca3));
-		pageRepository.save(new Page(null, 1, "path1/path1", ca3));
-		Catalog ca4 = catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3));
+		pageRepository.save(new Page(null, 1, "path1/path1", ca3));*/
+		Catalog ca4 = catalogRepository.save(new Catalog(null, new Date(), new Date(), cl3,"Catalog description"));
+		/*pageRepository.save(new Page(null, 1, "path1/path1", ca4));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca4));
 		pageRepository.save(new Page(null, 1, "path1/path1", ca4));
-		pageRepository.save(new Page(null, 1, "path1/path1", ca4));
-		pageRepository.save(new Page(null, 1, "path1/path1", ca4));
+		pageRepository.save(new Page(null, 1, "path1/path1", ca4));*/
+		
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl4,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl4,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl4,"Catalog description"));
+		
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl5,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl5,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl5,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl5,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl5,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl5,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl5,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl5,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl5,"Catalog description"));
+		
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
+		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
 	}
 
 }

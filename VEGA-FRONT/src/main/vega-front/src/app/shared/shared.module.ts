@@ -9,6 +9,7 @@ import { ConfirmModalComponent } from '../common/modal/confirm-modal/confirm-mod
 import { NbSelectModule, NbCalendarRangeModule } from '@nebular/theme';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PageModalComponent } from '../pages/catalog/page-modal/page-modal.component';
+import { FileUploadModule } from 'ng2-file-upload';
 @NgModule({
 
   exports: [
@@ -18,7 +19,8 @@ import { PageModalComponent } from '../pages/catalog/page-modal/page-modal.compo
     Ng2SmartTableModule,
     NbSelectModule,
     NgSelectModule,
-    NbCalendarRangeModule
+    NbCalendarRangeModule,
+    FileUploadModule
     
   ],
   

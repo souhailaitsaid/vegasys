@@ -2,10 +2,12 @@ package com.vega.sys.controller;
 
 import java.util.List;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,7 +56,12 @@ public class ClientRestController {
 		String message = client.getId()!=null ?  "messages.updated" : "messages.added";
 		try {
 			clientRepository.save(client);
-		} catch (Exception e) {
+		} catch (DataIntegrityViolationException e) {
+			e.printStackTrace();
+			message = "messages.client.unique";
+			return new ResponseEntity<Response>(new Response(false, message), HttpStatus.OK);
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Response>(new Response(false, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
 		}

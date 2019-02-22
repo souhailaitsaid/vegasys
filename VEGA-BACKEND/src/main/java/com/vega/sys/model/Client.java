@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,8 +29,10 @@ public class Client implements Persistable<Long>  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long clientId;
+	@Column(unique=true)
 	String clientName;
 	String description;
+	@Column(unique=true)
 	String email;
 	Long phoneNumber;
 	
