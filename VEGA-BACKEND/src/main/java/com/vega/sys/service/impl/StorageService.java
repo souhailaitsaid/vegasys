@@ -32,11 +32,7 @@ public class StorageService implements IStorageService {
 
 	private String getPagesPath(String clientId, String catalogId, String type, String rootLocation) {
 		return rootLocation + "/CLIENT_" + clientId + "/CATALOG_" + catalogId;
-		/*if (FolderConstant.PAGE.getFolder().equalsIgnoreCase(type)) {
-			return rootLocation + "/CLIENT_" + clientId + "/CATALOG_" + catalogId;
-		} else {
-			return rootLocation + "/CLIENT_" + clientId + "/CATALOG_" + catalogId;
-		}*/
+
 	}
 
 	public Path storePages(MultipartFile file, String clientId, String catalogId, String type) {
@@ -51,20 +47,12 @@ public class StorageService implements IStorageService {
 				logger.info("StorageService.store() , rootLocation  : {} created", rootLocation);
 			}
 			Path Foler = Paths.get(getPagesPath(clientId, catalogId, type, configPropeties.getUploadFolder()));
-			/*
-			 * if(Files.exists(Foler)) {
-			 * logger.info("StorageService.store() , rootLocation  : {} folder exist"
-			 * ,rootLocation ); deleteDirectoryRecursion(Foler);
-			 * 
-			 * }
-			 */
 			if (!Files.exists(Foler)) {
 				logger.info("StorageService.store() , Foler  : {} doesn't exist", Foler);
 				Files.createDirectories(Foler);
 				logger.info("StorageService.store() , Foler  : {} created", Foler);
 			}
-			Files.copy(file.getInputStream(), Foler.resolve(file.getOriginalFilename()),
-					StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(file.getInputStream(), Foler.resolve(file.getOriginalFilename()),StandardCopyOption.REPLACE_EXISTING);
 			logger.info("<== StorageService.store()");
 			return Foler.resolve(file.getOriginalFilename());
 
@@ -126,6 +114,16 @@ public class StorageService implements IStorageService {
 
 	public void deleteAll() {
 		final Path rootLocation = Paths.get(configPropeties.getUploadFolder());
+		FileSystemUtils.deleteRecursively(rootLocation.toFile());
+	}
+	
+	public void deleteClientCatalog(String clientId, String catalogId) {
+		final Path rootLocation = Paths.get(configPropeties.getUploadFolder()+ "/CLIENT_" + clientId + "/CATALOG_" + catalogId);
+		FileSystemUtils.deleteRecursively(rootLocation.toFile());
+	}
+	
+	public void deleteClient(String clientId) {
+		final Path rootLocation = Paths.get(configPropeties.getUploadFolder()+ "/CLIENT_" + clientId);
 		FileSystemUtils.deleteRecursively(rootLocation.toFile());
 	}
 

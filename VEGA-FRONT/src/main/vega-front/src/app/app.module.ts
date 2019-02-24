@@ -18,6 +18,7 @@ import { AppConfig } from './app.config';
 import { TranslateModule, TranslateLoader, TranslateService, } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import localeFr from '@angular/common/locales/fr';
+import { NbAccessChecker } from '@nebular/security';
 
 registerLocaleData(localeFr);
 
@@ -52,7 +53,7 @@ export function initConfig(config: AppConfig) {
   bootstrap: [AppComponent],
   providers: [
     AppConfig,
-    { provide: APP_INITIALIZER, useFactory: initConfig, deps: [AppConfig], multi: true },
+   // { provide: APP_INITIALIZER, useFactory: initConfig, deps: [AppConfig], multi: true },
     { provide: APP_BASE_HREF, useValue: '/' },
     {
       provide: LOCALE_ID, useFactory: (translate: TranslateService) => {

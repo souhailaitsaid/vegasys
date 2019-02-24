@@ -15,10 +15,12 @@ import com.vega.sys.model.Catalog;
 import com.vega.sys.model.Category;
 import com.vega.sys.model.Client;
 import com.vega.sys.model.Page;
+import com.vega.sys.model.user.User;
 import com.vega.sys.repository.CatalogRepository;
 import com.vega.sys.repository.CategoryRepository;
 import com.vega.sys.repository.ClientRepository;
 import com.vega.sys.repository.PageRepository;
+import com.vega.sys.repository.UserRepository;
 
 @Component
 public class InitDataLoader implements ApplicationRunner {
@@ -33,6 +35,9 @@ public class InitDataLoader implements ApplicationRunner {
 	
 	@Autowired
 	PageRepository pageRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -120,6 +125,9 @@ public class InitDataLoader implements ApplicationRunner {
 		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
 		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
 		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
+	
+	
+		User u = userRepository.save(new User("demo", "demo", "demo", "demo"));
 	}
 
 }

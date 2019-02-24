@@ -62,7 +62,7 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 
 export const NB_CORE_PROVIDERS = [
   ...DATA_SERVICES,
-  ...NbAuthModule.forRoot({
+ /* ...NbAuthModule.forRoot({
 
     strategies: [
       NbDummyAuthStrategy.setup({
@@ -79,7 +79,7 @@ export const NB_CORE_PROVIDERS = [
       },
     },
   }).providers,
-
+*/
   NbSecurityModule.forRoot({
     accessControl: {
       guest: {
@@ -108,7 +108,7 @@ export const NB_CORE_PROVIDERS = [
     CommonModule,
   ],
   exports: [
-    NbAuthModule,
+    //NbAuthModule,
   ],
   declarations: [],
 })

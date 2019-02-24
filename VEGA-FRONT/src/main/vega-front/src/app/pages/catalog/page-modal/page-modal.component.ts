@@ -8,6 +8,7 @@ import { ConfirmModalComponent } from '../../../common/modal/confirm-modal/confi
 import { Toast, BodyOutputType, ToasterService } from 'angular2-toaster';
 import { FileUploader, FileItem, ParsedResponseHeaders } from 'ng2-file-upload';
 import { NgxGalleryOptions, NgxGalleryAnimation, NgxGalleryImage } from 'ngx-gallery';
+import { UserInfoService } from '../../../services/user-info.service';
 // const URL = '/api/';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
@@ -30,6 +31,7 @@ export class PageModalComponent implements OnInit {
   galleryImages: NgxGalleryImage[];
   @ViewChild('fileInput') fileInput: ElementRef;
   constructor(
+    private userInfoService : UserInfoService,
     private toaster: ToasterService,
     private modalService: NgbModal, private activeModal: NgbActiveModal,
     private translate: TranslateService, private service: PageService) { }
@@ -70,11 +72,12 @@ export class PageModalComponent implements OnInit {
     this.galleryOptions = this.getGalleryOptions();
     this.getAll()
     this. getAllUploadedFiles()
-    const headers = [{ name: 'Accept', value: 'application/json' }];
+    
     this.uploader = new FileUploader(
       {
-        url: this.service.api_root + '/uploadFile',
-        headers: headers,
+        url: this.service.getApiRequest().getAppConfig().baseApiPath + 'uploadFile',
+        headers:  [{ name: 'Accept', value: 'application/json' },
+        { name: 'Authorization', value:  this.userInfoService.getStoredToken() },],
         allowedMimeType: ['image/png', 'image/gif', 'image/jpeg'],
         maxFileSize: 5 * 1024 * 1024 // 5 MB
       }

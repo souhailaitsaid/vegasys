@@ -1,0 +1,46 @@
+<div class="row">
+    <nb-card [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge" class="container h-100 d-flex justify-content-center col-4">
+      <nb-card-body>
+        <h1 id="title" class="title">Login</h1>
+        <nb-alert *ngIf="errMsg && !submitted" outline="danger" role="alert">
+            <p class="alert-title"><b>{{errMsg}}</b></p>
+          </nb-alert>
+        <form (ngSubmit)="login()" novalidate [formGroup]="form" aria-labelledby="title">
+
+          <div class="form-control-group">
+            <label class="label" for="input-username">Email address:</label>
+            <input nbInput fullWidth formControlName="username" id="input-username"
+              placeholder="User name" autofocus 
+              [attr.aria-invalid]="form.controls.invalid && form.controls.touched ? true : null">
+            <ng-container *ngIf="form.controls.invalid && form.controls.touched">
+              <p class="error-message" *ngIf="form.controls.errors?.required">
+                Email is required!
+              </p>
+              <p class="error-message" *ngIf="form.controls.errors?.pattern">
+                Email should be the real one!
+              </p>
+            </ng-container>
+          </div>
+          <br>
+          <div class="form-control-group">
+            <label class="label" for="input-password">Password:</label>
+            <input nbInput fullWidth formControlName="password" type="password" id="input-password"
+              placeholder="Password" 
+              [attr.aria-invalid]="form.controls.invalid && form.controls.touched ? true : null">
+            <ng-container *ngIf="form.controls.invalid && password.touched ">
+              <p class="error-message" *ngIf="form.controls.errors?.required">
+                Password is required!
+              </p>
+            </ng-container>
+          </div>
+          <br>
+          <div class="form-control-group">
+            <button nbButton fullWidth status="success" [disabled]="submitted || !form.valid" [class.btn-pulse]="submitted">
+              Log In
+            </button>
+          </div>
+
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>

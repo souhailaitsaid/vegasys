@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app.config';
 import { Observable } from 'rxjs';
+import { ApiRequestService } from '../../services/api/api-request.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,22 +11,21 @@ import { Observable } from 'rxjs';
 )
 export class DashboardService {
   root: string
-  constructor(private http: HttpClient, private config: AppConfig) {
-    this.root = this.config.getConfig()
-    console.log(this.root)
+  constructor(private apiRequestService : ApiRequestService) {
+   
   }
 
 
   getCatalogsByClient(): Observable<any> {
-    return this.http.get(this.root + '/catalogs/catalogsByClient');
+    return this.apiRequestService.get( 'catalogs/catalogsByClient');
   }
   getDtByStatus(): Observable<any> {
-    return this.http.get(this.root + '/demandeTravails/byStatus');
+    return this.apiRequestService.get(this.root + '/demandeTravails/byStatus');
   }
   getDtByPersonnel(): Observable<any> {
-    return this.http.get(this.root + '/demandeTravails/byPersonnel');
+    return this.apiRequestService.get(this.root + '/demandeTravails/byPersonnel');
   }
   getBtDtByStatus(): Observable<any> {
-    return this.http.get(this.root + '/demandeTravails/btdtbyStatus');
+    return this.apiRequestService.get(this.root + '/demandeTravails/btdtbyStatus');
   }
 }
