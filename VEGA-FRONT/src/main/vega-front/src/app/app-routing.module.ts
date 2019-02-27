@@ -7,10 +7,10 @@ import { AuthGuard } from './services/auth_guard.service';
 
 const routes: Routes = [
   {
-    path: 'pages', canActivate:[AuthGuard], loadChildren: 'app/pages/pages.module#PagesModule'
+    path: 'pages', canActivate:[AuthGuard], data: { expectedRoles: ['ADMIN','USER']}, loadChildren: 'app/pages/pages.module#PagesModule'
   },
   {
-    path: 'auth', loadChildren: 'app/auth/auth.module#AuthModule'
+    path: 'auth', data: { expectedRoles: []}, loadChildren: 'app/auth/auth.module#AuthModule'
   },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth' },

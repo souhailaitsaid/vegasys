@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { TranslateService } from '@ngx-translate/core';
 import { NbMenuItem } from '@nebular/theme';
+import { UserInfoService } from '../services/user-info.service';
 
 @Component({
   selector: 'ngx-pages',
@@ -14,7 +15,7 @@ import { NbMenuItem } from '@nebular/theme';
 })
 export class PagesComponent implements OnInit {
   menu  : NbMenuItem[]
-  constructor(private translate: TranslateService) { 
+  constructor(private translate: TranslateService, private userInfoService : UserInfoService) { 
 
   }
   ngOnInit() {
@@ -30,8 +31,16 @@ export class PagesComponent implements OnInit {
         title: this.translate.instant('common.menu.clients'),
         icon: 'nb-star',
         link: '/pages/clients',
+        hidden : !this.userInfoService.isAdmin()
       },
       {
+        title: this.translate.instant('common.menu.users'),
+        icon: 'nb-person',
+        link: '/pages/users',
+        hidden : !this.userInfoService.isAdmin()
+      },
+      {
+        hidden : !this.userInfoService.isAdmin(),
         title: this.translate.instant('common.menu.config'),
         icon: 'nb-gear',
         children: [

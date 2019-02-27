@@ -8,10 +8,12 @@ const routes: Routes = [
   {
     path: '',
     component: ConfigurationComponent,
+   
     children: [
       {
         path: 'categories',
         component: CategoryComponent,
+        data: { expectedRoles: []},
       },
     ],
   },

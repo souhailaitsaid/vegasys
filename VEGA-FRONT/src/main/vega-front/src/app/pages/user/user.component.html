@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <nb-card>
+      <nb-card-header>{{'user.form' | translate}}</nb-card-header>
+      <nb-card-body>
+        <form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>{{'user.userId' | translate}}</label>
+                <input type="text" formControlName="userId" class="form-control" placeholder="{{'user.userId' | translate}}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>{{'user.firstName' | translate}}</label>
+                <input type="text" formControlName="firstName" class="form-control" placeholder="{{'user.firstName' | translate}}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>{{'user.lastName' | translate}}</label>
+                <input type="text" formControlName="lastName" class="form-control" placeholder="{{'user.lastName' | translate}}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>{{'user.email' | translate}}</label>
+                <input type="text" formControlName="email" class="form-control" placeholder="{{'user.email' | translate}}">
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>{{'user.client' | translate}}</label>
+                <select class="form-control" formControlName="client" [compareWith]="byClientId">
+                  <option *ngFor="let element of clients | async" [ngValue]="element">
+                    {{ element.clientName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>{{'user.role' | translate}}</label>
+                <select class="form-control" formControlName="role">
+                  <option *ngFor="let element of roles " [ngValue]="element">
+                    {{ element }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        <div class="row">
+
+            <div class="col-md-1">
+              <div class="form-group">
+                <nb-checkbox class="check" status="success" formControlName="active">{{'user.isActive' | translate}}</nb-checkbox>
+              </div>
+            </div>
+            <div class="col-md-1">
+              <div class="form-group">
+                <nb-checkbox class="check" status="success" formControlName="blocked">{{'user.isBlocked' | translate}}</nb-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              <div class="form-group">
+
+                <button type="submit" [disabled]="!form.valid" class="btn btn-primary">{{'common.btn.save' |
+                  translate}}</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="full-width">
+      <nb-card-header>
+        {{'user.list' | translate}}
+      </nb-card-header>
+      <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+          (custom)="onCustom($event)">
+        </ng2-smart-table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+<toaster-container [toasterconfig]="config"></toaster-container>

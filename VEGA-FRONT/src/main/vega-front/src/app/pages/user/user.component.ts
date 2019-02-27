@@ -1,3 +1,6 @@
+
+
+
 import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
@@ -12,17 +15,18 @@ import { CategoryService } from '../../@core/data/category.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { DataService } from '../../services/data-service';
+import { UserService } from '../../@core/data/user.service';
 
 
 @Component({
-  selector: 'client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.scss']
+  selector: 'ngx-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class ClientComponent implements OnInit {
-  loading = false;
-  public categories: Observable<any[]>
-  public selectedCategories: any[]
+export class UserComponent implements OnInit {
+  public roles: any[] = ['USER','ADMIN']
+  public clients: Observable<any[]>
+  public selectedClient: any
   settings;
   config: ToasterConfig;
   form: FormGroup
@@ -33,36 +37,65 @@ export class ClientComponent implements OnInit {
     private modalService: NgbModal,
     private toaster: ToasterService,
     private translate: TranslateService,
-    private service: ClientService,
-    private categoryService: CategoryService) {
+    private service: UserService,
+    private clientService: ClientService) {
 
   }
 
   ngOnInit() {
     this.settings = this.getSettings()
     this.form = new FormGroup({
-      clientId: new FormControl(),
-      description: new FormControl(null, Validators.required),
-      clientName: new FormControl(null, Validators.required),
+      userId: new FormControl(),
+      userName: new FormControl(null, Validators.required),
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      phoneNumber: new FormControl(null, [Validators.required]),
-      categories: new FormControl(null, [Validators.required]),
+      active: new FormControl(true, ),
+      blocked: new FormControl(false),
+      role: new FormControl(null, [Validators.required]),
+      client: new FormControl(null),
     });
     this.getCategories()
     this.getAll()
   }
 
-
+  onSubmit() {
+    if (this.form.valid) {
+      let element: any = {
+        userId: this.form.controls['userId'].value,
+        userName: this.form.controls['userName'].value,
+        firstName: this.form.controls['firstName'].value,
+        lastName: this.form.controls['lastName'].value,
+        email: this.form.controls['email'].value,
+        active: this.form.controls['active'].value,
+        blocked: this.form.controls['blocked'].value,
+        role: this.form.controls['role'].value,
+        client: this.form.controls['client'].value,
+      }
+      this.service.save(element).subscribe(
+        response => {
+          if(response.success){
+            this.showToast('success', this.translate.instant(response.message), '')
+          }else{
+            this.showToast('warning', this.translate.instant(response.message), '')
+          }
+          this.reset();
+          this.getAll();
+        },
+        error => this.showToast('error', this.translate.instant('messages.server-error'), '')
+      );
+    }
+  }
 
   getCategories() {
     /* this.categoryService.findAll().subscribe(response => {
        this.categories = response
      })*/
-    this.categories = this.categoryService.findAll()
+    this.clients = this.clientService.findAll()
   }
 
-  byCategoryId(item1: any, item2: any): boolean {
-    return item1 && item2 ? item1.categorieId === item2.categorieId : item1 === item2;
+  byClientId(item1: any, item2: any): boolean {
+    return item1 && item2 ? item1.clientId === item2.clientId : item1 === item2;
   }
 
   showLargeModal(id: number, event) {
@@ -76,33 +109,7 @@ export class ClientComponent implements OnInit {
       console.log('activeModal.result.dismiss')
     });
   }
-  onSubmit() {
-    this.loading=true
-    if (this.form.valid) {
-      let element: any = {
-        clientId: this.form.controls['clientId'].value,
-        clientName: this.form.controls['clientName'].value,
-        description: this.form.controls['description'].value,
-        email: this.form.controls['email'].value,
-        phoneNumber: this.form.controls['phoneNumber'].value,
-        categories: this.form.controls['categories'].value,
-      }
-      this.service.save(element).subscribe(
-        response => {
-          if(response.success){
-            this.showToast('success', this.translate.instant(response.message), '')
-          }else{
-            this.showToast('warning', this.translate.instant(response.message), '')
-          }
-          this.reset();
-          this.getAll();
-         
-        },
-        error => this.showToast('error', this.translate.instant('messages.server-error'), '')
-      );
 
-    }
-  }
   reset() {
     this.form.reset();
   }
@@ -110,17 +117,20 @@ export class ClientComponent implements OnInit {
   edit(event): void {
     console.log(event);
     this.form.patchValue({
-      clientId: event.data.clientId,
-      clientName: event.data.clientName,
-      description: event.data.description,
-      email: event.data.email,
-      phoneNumber: event.data.phoneNumber,
-      categories: event.data.categories,
+      userId: event.data.userId,
+       userName: event.data.userName,
+        firstName: event.data.firstName,
+        lastName: event.data.lastName,
+        email: event.data.email,
+        active: event.data.active,
+        blocked: event.data.blocked,
+        role: event.data.role,
+        client: event.data.client,
     });
   }
   onDeleteConfirm(event): void {
     if (event.data) {
-      this.showLargeModal(event.data.clientId, event)
+      this.showLargeModal(event.data.userName, event)
     }
   }
 
@@ -141,13 +151,8 @@ export class ClientComponent implements OnInit {
     if (event.action === 'editAction') {
         this.edit(event)
     }
-    else if  (event.action === 'deleteAction') {
-      this.showLargeModal(event.data.clientId, event)
-    }
-    else if  (event.action === 'redirectToCatalog') {
-      console.log('redirectToCatalog : catalogs/client/'+event.data.clientId)
-      this.dataservice.client = event.data
-      this.router.navigate(['pages/catalogs/client/'+event.data.clientId])
+    else if (event.action === 'deleteAction') {
+      this.showLargeModal(event.data.userName, event)
     }
 
   }
@@ -155,17 +160,14 @@ export class ClientComponent implements OnInit {
 
 
   getAll() {
-    this.loading = true;
     this.service.findAll()
       .subscribe(
         elements => {
           this.source.load(elements);
-          this.loading = false;
           console.log(elements);
         },
         err => {
           this.showToast('error', this.translate.instant('messages.server-error'), '')
-          this.loading = false;
           console.log(err)
         }
       )
@@ -174,6 +176,7 @@ export class ClientComponent implements OnInit {
   getSettings() {
     return {
       actions: {
+        width:'50px',
         custom: [
         
           {
@@ -183,10 +186,6 @@ export class ClientComponent implements OnInit {
           {
             name: 'deleteAction',
             title: '<i class="fa fa-trash-alt" title="Delete"></i>'
-          },
-          {
-            name: 'redirectToCatalog',
-            title: '<i class="fa fa-list-alt" title="Catalogs"></i>'
           },
         ],
         add: false,
@@ -198,50 +197,53 @@ export class ClientComponent implements OnInit {
       edit: TABLE_EDIT,
       delete: TABLE_DELETE,
       columns: {
-        clientId: {
+        userId: {
           title: this.translate.instant('common.id'),
           type: 'number',
         },
-        clientName: {
-          title: this.translate.instant('client.clientName'),
+      userName: {
+          title: this.translate.instant('user.userName'),
           type: 'string',
         },
-        description: {
-          title: this.translate.instant('common.description'),
+        firstName: {
+          title: this.translate.instant('user.firstName'),
+          type: 'string',
+        },
+        lastName: {
+          title: this.translate.instant('user.lastName'),
           type: 'string',
         },
         email: {
-          title: this.translate.instant('client.email'),
+          show:false,
+          title: this.translate.instant('user.email'),
           type: 'string',
         },
-        phoneNumber: {
-          title: this.translate.instant('client.phoneNumber'),
+        active: {
+          title: this.translate.instant('user.isActive'),
+          valuePrepareFunction: (value) => { console.log(value);return value ? 'true' : 'false' }
+        },
+        blocked: {
+          title: this.translate.instant('user.isBlocked'),
+          valuePrepareFunction: (value) => { return value ? 'true' : 'false' }
+        },
+        role: {
+          title: this.translate.instant('user.role'),
           type: 'number',
         },
-        categories: {
-          title: this.translate.instant('client.categories'),
+        client: {
+          title: this.translate.instant('user.client'),
           class: 'string',
           valuePrepareFunction: (data) => {
-            let values = ''
-            data.forEach(function (value) {
-              if (values === '') {
-                values = values + value.categoryName
-              } else {
-                values = values + ', ' + value.categoryName
-              }
-            })
-            return values
+            if(data){
+              return data.clientName
+            }
+            return ""
           },
           filterFunction: (cell?: any, search?: string) => {
             if (search.length > 0 && cell) {
-              let found = false
-              cell.forEach(function (value) {
-                if (value.categoryName.match(search)) {
-                  found = true
-                }
-              })
-              return found
+              cell.clientName.match(search)
             }
+            return false
           },
         },
 
@@ -271,3 +273,4 @@ export class ClientComponent implements OnInit {
     this.toaster.popAsync(toast);
   }
 }
+

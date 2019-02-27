@@ -5,6 +5,7 @@ import { AnalyticsService } from '../../../@core/utils';
 import { LayoutService } from '../../../@core/utils';
 import { LoginService } from '../../../services/api/login.service';
 import { filter, map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
 
   userMenu = [{ id:"profile",title: 'Profile' }, { id: 'logout',title: 'Log out' }];
 
-  constructor(private loginService : LoginService,
+  constructor(private router : Router,
+    private loginService : LoginService,
     private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private analyticsService: AnalyticsService,
@@ -33,6 +35,10 @@ export class HeaderComponent implements OnInit {
         if(value.item['id']==='logout'){
           console.log(value.item['id'])
           this.loginService.logout()
+        } 
+       else if(value.item['id']==='profile'){
+          console.log(value.item['id'])
+          this.router.navigate(['pages/profile']);
         }
          
         } );

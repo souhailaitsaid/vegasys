@@ -1,31 +1,33 @@
 import { Injectable } from '@angular/core';
 
-export interface UserInStorage{
-    userId:string;
-    email:string;
-    displayName:string;
-    token:string;
+export interface UserInStorage {
+    userId: number;
+    userName: string;
+    email: string;
+    displayName: string;
+    token: string;
+    roles: string[];
 }
 
-export interface LoginInfoInStorage{
-    success:boolean;
-    message:string;
-    landingPage:string;
-    user?:UserInStorage;
+export interface LoginInfoInStorage {
+    success: boolean;
+    message: string;
+    landingPage: string;
+    user?: UserInStorage;
 }
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class UserInfoService {
 
-    public currentUserKey:string="currentUser";
-    public storage:Storage = sessionStorage; // <--- you may switch between sessionStorage or LocalStrage (only one place to change)
+    public currentUserKey: string = "currentUser";
+    public storage: Storage = sessionStorage; // <--- you may switch between sessionStorage or LocalStrage (only one place to change)
 
-    constructor() {}
+    constructor() { }
 
     //Store userinfo from session storage
-    storeUserInfo(userInfoString:string) {
+    storeUserInfo(userInfoString: string) {
         this.storage.setItem(this.currentUserKey, userInfoString);
     }
 
@@ -35,14 +37,14 @@ export class UserInfoService {
     }
 
     //Get userinfo from session storage
-    getUserInfo():UserInStorage|null {
-        try{
-            let userInfoString:string = this.storage.getItem(this.currentUserKey);
+    getUserInfo(): UserInStorage | null {
+        try {
+            let userInfoString: string = this.storage.getItem(this.currentUserKey);
             if (userInfoString) {
-                let userObj:UserInStorage = JSON.parse(this.storage.getItem(this.currentUserKey));
+                let userObj: UserInStorage = JSON.parse(this.storage.getItem(this.currentUserKey));
                 return userObj;
             }
-            else{
+            else {
                 return null;
             }
         }
@@ -51,22 +53,40 @@ export class UserInfoService {
         }
     }
 
-    isLoggedIn():boolean{
-        return this.storage.getItem(this.currentUserKey)?true:false;
+    isLoggedIn(): boolean {
+        return this.storage.getItem(this.currentUserKey) ? true : false;
     }
 
     //Get User's Display name from session storage
-    getUserName():string{
-        let userObj:UserInStorage = this.getUserInfo();
-        if (userObj!== null){
+    getUserName(): string {
+        let userObj: UserInStorage = this.getUserInfo();
+        if (userObj !== null) {
             return userObj.displayName
         }
         return "no-user";
     }
 
-    getStoredToken():string|null {
-        let userObj:UserInStorage = this.getUserInfo();
-        if (userObj !== null){
+    isAdmin() {
+        let userObj: UserInStorage = this.getUserInfo();
+        if (userObj !== null) {
+            console.log('isAdmin : '+(userObj.roles.indexOf("ADMIN") > -1))
+            return userObj.roles.indexOf("ADMIN") > -1
+        }
+       
+        return false
+    }
+
+    isUser() {
+        let userObj: UserInStorage = this.getUserInfo();
+        if (userObj !== null) {
+            return userObj.roles.indexOf("USER") > -1
+        }
+        return false
+    }
+
+    getStoredToken(): string | null {
+        let userObj: UserInStorage = this.getUserInfo();
+        if (userObj !== null) {
             return userObj.token;
         }
         return null;

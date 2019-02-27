@@ -8,6 +8,8 @@ import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { ConfigurationModule } from './configuration/configuration.module';
 import { ClientModule } from './client/client.module';
 import { CatalogModule } from './catalog/catalog.module';
+import { UserModule } from './user/user.module';
+import { ProfileModule } from './profile/profile.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -22,6 +24,8 @@ const PAGES_COMPONENTS = [
     ClientModule,
     CatalogModule,
     ConfigurationModule,
+    UserModule,
+    ProfileModule,
     MiscellaneousModule,
   ],
   declarations: [

@@ -4,7 +4,6 @@ import { AuthComponent } from './auth.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginModule } from './login/login.module';
 import { ThemeModule } from '../@theme/theme.module';
-import { NbAuthBlockComponent } from '@nebular/auth';
 
 const PAGES_COMPONENTS = [
   AuthComponent

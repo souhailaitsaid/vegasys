@@ -60,6 +60,19 @@
         "pages":"Pages",
         "nbrPages":"Nombre des pages",
         "description":"Description du catalogue"
+    },
+
+    "user": {
+        "form": "Formulaire d'ajout/modification d'un utilisateur",
+        "list": "Liste des utilisateur",
+        "userId":"ID utilisateur",
+        "firstName":"Prénom",
+        "lastName":"Nom",
+        "email":"email",
+        "isActive":"Actif",
+        "isBlocked":"Blocké",
+        "role":"Rôle",
+        "client":"Client"
     }
  
 }

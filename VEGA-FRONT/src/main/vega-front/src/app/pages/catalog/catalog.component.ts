@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '../../@core/data/client.service';
 import { CatalogService } from '../../@core/data/catalog.service';
 import { shiftInitState } from '@angular/core/src/view';
@@ -13,6 +13,7 @@ import { TABLE_ADD, TABLE_EDIT, TABLE_DELETE } from '../table-config';
 import { NbCalendarRange, NbDateService } from '@nebular/theme';
 import { DatePipe } from '@angular/common';
 import { PageModalComponent } from './page-modal/page-modal.component';
+import { DataService } from '../../services/data-service';
 
 @Component({
   selector: 'ngx-catalog',
@@ -28,7 +29,10 @@ export class CatalogComponent implements OnInit {
   config: ToasterConfig;
   form: FormGroup
   source: LocalDataSource = new LocalDataSource();
-  constructor(private route: ActivatedRoute, protected dateService: NbDateService<Date>,
+  constructor(
+    private dataservice: DataService,
+    private router: Router,
+    private route: ActivatedRoute, protected dateService: NbDateService<Date>,
     private clientService: ClientService,
     private service: CatalogService,
     private modalService: NgbModal,
@@ -59,7 +63,7 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit() {
 
-    this.param = this.route.params.subscribe(params => {
+    /*this.param = this.route.params.subscribe(params => {
       if (params['id']) {
         this.clientService.findById(params['id']).subscribe(response => {
           this.client = response
@@ -67,12 +71,22 @@ export class CatalogComponent implements OnInit {
         })
       }
 
-    });
+    });*/
+
+    if (!this.dataservice.client) {
+      this.router.navigate(['pages/clients'])
+    } else {
+      this.client = this.dataservice.client
+      this.getAll(this.client.clientId)
+     
+    
+    }
     this.settings = this.getSettings()
     this.form = new FormGroup({
       catalogId: new FormControl(),
-      description : new FormControl(),
+      description: new FormControl(),
     });
+
   }
 
 
@@ -110,8 +124,8 @@ export class CatalogComponent implements OnInit {
   showPagesModal(id: number, event) {
     console.log(event)
     const activeModal = this.modalService.open(PageModalComponent, { size: 'lg', container: 'nb-layout' });
-    activeModal.componentInstance.modalHeader = this.translate.instant('modals.pageManagement', 
-    { debut: this.datePipe.transform(event.data.debut, 'dd-MMM-yyyy'), fin: this.datePipe.transform(event.data.fin, 'dd-MMM-yyyy'), name: event.data.client.clientName });
+    activeModal.componentInstance.modalHeader = this.translate.instant('modals.pageManagement',
+      { debut: this.datePipe.transform(event.data.debut, 'dd-MMM-yyyy'), fin: this.datePipe.transform(event.data.fin, 'dd-MMM-yyyy'), name: event.data.client.clientName });
     activeModal.componentInstance.catalog = event.data
     activeModal.componentInstance.modalBtn = this.translate.instant('modals.close');
     activeModal.result.then((data) => {
@@ -125,7 +139,7 @@ export class CatalogComponent implements OnInit {
     if (this.isValidRange) {
       let element: any = {
         catalogId: this.form.controls['catalogId'].value,
-        description :this.form.controls['description'].value,
+        description: this.form.controls['description'].value,
         debut: this.range.start,
         fin: this.range.end,
         client: this.client,
@@ -153,7 +167,7 @@ export class CatalogComponent implements OnInit {
     }
     this.form.patchValue({
       catalogId: event.data.catalogId,
-      description : event.data.description
+      description: event.data.description
     });
   }
   onDeleteConfirm(event): void {
@@ -267,18 +281,18 @@ export class CatalogComponent implements OnInit {
           }
         },
 
-       /* pages: {
-          title: this.translate.instant('catalog.nbrPages'),
-          type: 'string',
-          valuePrepareFunction: (data) => {
-            return data.length
-          },
-          filterFunction: (cell?: any, search?: string) => {
-            if (search.length > 0 && cell) {
-              return search == cell.length
-            }
-          }
-        },*/
+        /* pages: {
+           title: this.translate.instant('catalog.nbrPages'),
+           type: 'string',
+           valuePrepareFunction: (data) => {
+             return data.length
+           },
+           filterFunction: (cell?: any, search?: string) => {
+             if (search.length > 0 && cell) {
+               return search == cell.length
+             }
+           }
+         },*/
 
         /* categories: {
            title: this.translate.instant('client.categories'),

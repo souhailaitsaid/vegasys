@@ -46,9 +46,10 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
         else {
+          this.loading = false;
           this.userInfoService.storeUserInfo(JSON.stringify(resp.item));
           console.log(resp)
-          this.router.navigate(['/pages']);
+          this.router.navigate([this.loginService.landingPage]);
         }
 
       },
