@@ -16,12 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.data.domain.Persistable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vega.sys.model.user.User;
+
 @Entity
-public class Client implements Persistable<Long>  {
+public class Client implements Persistable<Long> {
 	/**
 	 * 
 	 */
@@ -29,27 +32,29 @@ public class Client implements Persistable<Long>  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long clientId;
-	@Column(unique=true)
+	@Column(unique = true)
 	String clientName;
 	String description;
-	@Column(unique=true)
+	@Column(unique = true)
 	String email;
 	Long phoneNumber;
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client",cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.PERSIST)
+	private List<User> users = new ArrayList<>();
+
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.PERSIST)
 	private List<Catalog> catalogs = new ArrayList<>();
-	
+
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client",cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client", cascade = CascadeType.PERSIST)
 	private List<Store> stores = new ArrayList<>();
-	
-	
-	 @ManyToMany(fetch = FetchType.LAZY)
-	 @JoinTable(name = "client_categories",
-	 joinColumns = { @JoinColumn(name = "clientId") },
-	 inverseJoinColumns = { @JoinColumn(name = "categoryId") })
-	 private Set<Category> categories = new HashSet<Category>();
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "client_categories", joinColumns = { @JoinColumn(name = "clientId") }, inverseJoinColumns = {
+			@JoinColumn(name = "categoryId") })
+	private Set<Category> categories = new HashSet<Category>();
 
 	public Long getClientId() {
 		return clientId;
@@ -71,9 +76,6 @@ public class Client implements Persistable<Long>  {
 		return serialVersionUID;
 	}
 
-	
-
-
 	@Override
 	public Long getId() {
 		return getClientId();
@@ -83,10 +85,7 @@ public class Client implements Persistable<Long>  {
 	public boolean isNew() {
 		return null == getId();
 	}
-	
-	
-	
-	
+
 	public List<Catalog> getCatalogs() {
 		return catalogs;
 	}
@@ -139,6 +138,16 @@ public class Client implements Persistable<Long>  {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
 
 	public Client(Long clientId, String clientName, String description, String email, Long phoneNumber) {
 		super();
@@ -159,9 +168,9 @@ public class Client implements Persistable<Long>  {
 		this.phoneNumber = phoneNumber;
 		this.categories = categories;
 	}
-	
-	
 
+
+	
 	
 
 }

@@ -7,7 +7,7 @@ import com.vega.sys.model.user.User;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findOneByUserId(String userId);
-    Optional<User> findOneByUserIdAndPassword(String userId, String password);
+    Optional<User> findOneByUsername(String userName);
+    Optional<User> findOneByUsernameAndPassword(String username, String password);
 }
 

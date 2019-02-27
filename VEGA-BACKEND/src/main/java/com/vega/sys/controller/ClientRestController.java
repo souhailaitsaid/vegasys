@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.vega.sys.model.Client;
 import com.vega.sys.repository.ClientRepository;
+import com.vega.sys.repository.UserRepository;
 import com.vega.sys.response.Response;
 
 @RestController
@@ -32,6 +33,7 @@ import com.vega.sys.response.Response;
 public class ClientRestController {
 	@Autowired
 	private ClientRepository clientRepository;
+	private UserRepository userRepository;
 	private static Sort SORTING_DESC = new Sort(Sort.Direction.DESC, "clientId");
 
 	@GetMapping()
@@ -56,6 +58,7 @@ public class ClientRestController {
 		String message = client.getId()!=null ?  "messages.updated" : "messages.added";
 		try {
 			clientRepository.save(client);
+			
 		} catch (DataIntegrityViolationException e) {
 			e.printStackTrace();
 			message = "messages.client.unique";

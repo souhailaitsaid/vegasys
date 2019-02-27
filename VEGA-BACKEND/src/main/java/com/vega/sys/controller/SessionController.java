@@ -54,13 +54,14 @@ public class SessionController {
     @ResponseBody
     public SessionResponse newSession(@RequestBody Login login, HttpServletRequest request, HttpServletResponse response) {
     	logger.info("checking login : {} ",login );
-        User user = userRepo.findOneByUserIdAndPassword(login.getUsername(), login.getPassword()).orElse(null);
+        User user = userRepo.findOneByUsernameAndPassword(login.getUsername(), login.getPassword()).orElse(null);
         SessionResponse resp = new SessionResponse();
         SessionItem sessionItem = new SessionItem();
         if (user != null){
         	
             sessionItem.setToken(new TokenUtil().createTokenForUser(user));
             sessionItem.setUserId(user.getUserId());
+            sessionItem.setUsername(user.getUsername());
             sessionItem.setFirstName(user.getFirstName());
             sessionItem.setLastName(user.getLastName());
             sessionItem.setEmail(user.getEmail());

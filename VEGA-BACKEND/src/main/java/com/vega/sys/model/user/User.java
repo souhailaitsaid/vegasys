@@ -1,6 +1,8 @@
 package com.vega.sys.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vega.sys.model.Client;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
 import lombok.*;
@@ -10,11 +12,15 @@ import java.util.EnumSet;
 @Entity
 public class User {
     @Id
-    @Getter @Setter private String userId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter @Setter private Long userId;
+	@Column(unique = true)
+    @Getter @Setter private String username;
     @Getter @Setter private String password = "";
     @Getter @Setter private String company;
     @Getter @Setter private String firstName;
     @Getter @Setter private String lastName;
+	@Column(unique = true)
     @Getter @Setter private String email;
 
     @JsonIgnore @Getter @Setter private int    securityProviderId;
@@ -37,13 +43,16 @@ public class User {
     @JsonIgnore @Getter @Setter private String  secretAnswer;
     @JsonIgnore @Getter @Setter private boolean enableBetaTesting;
     @JsonIgnore @Getter @Setter private boolean enableRenewal;
+    
+	@ManyToOne(optional = true, fetch = FetchType.LAZY)
+	@Getter @Setter private Client client;
 
     public User(){
         this("new", "PASSWORD", Role.USER, "new", "new", true, "", "", "", "", "", "", "", "", true, false);
     }
 
     public User(String userId, String password, String firstName, String lastName){
-        this(userId, password, Role.USER, firstName, lastName, true, "", "", "", "", "", "", "", "", true, false);
+        this(userId, password, Role.ADMIN, firstName, lastName, true, "", "", "", "", "", "", "", "", true, false);
     }
 
     public User(String userId, String password, Role role, String firstName, String lastName){
@@ -54,11 +63,11 @@ public class User {
         this(userId, password, role, firstName, lastName, isActive, "", "", "", "", "", "", "", "", true, false);
     }
 
-    public User(String userId, String password, Role role, String firstName, String lastName, boolean isActive,
+    public User(String username, String password, Role role, String firstName, String lastName, boolean isActive,
          String company, String phone, String address1, String address2, String country, String postal,
          String secretQuestion, String secretAnswer, boolean enableRenewal, boolean enableBetaTesting){
-        this.setUserId(userId);
-        this.setEmail(userId);
+        this.setUsername(username);
+        this.setEmail(username);
         this.setPassword((password));
         this.setRole(role);
         this.setFirstName(firstName);

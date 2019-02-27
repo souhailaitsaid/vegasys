@@ -51,9 +51,9 @@ public class TokenUtil {
             .getBody();
 
         User user = new User();
-        user.setUserId( (String)claims.get("userId"));
+        user.setUsername( (String)claims.get("username"));
         user.setRole(Role.valueOf((String)claims.get("role")));
-        if (user.getUserId() != null && user.getRole() != null) {
+        if (user.getUsername() != null && user.getRole() != null) {
             return new TokenUser(user);
         } else {
             return null;
@@ -68,7 +68,7 @@ public class TokenUtil {
       return Jwts.builder()
         .setExpiration(new Date(System.currentTimeMillis() + VALIDITY_TIME_MS))
         .setSubject(user.getFullName())
-        .claim("userId", user.getUserId())
+        .claim("username", user.getUsername())
         .claim("role", user.getRole().toString())
         .signWith(SignatureAlgorithm.HS256, secret)
         .compact();

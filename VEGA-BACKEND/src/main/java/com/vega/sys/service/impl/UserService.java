@@ -12,6 +12,16 @@ public class UserService {
 
   @Autowired
   private UserRepository userRepo;
+  
+  
+  
+  public UserRepository getUserRepo() {
+	return userRepo;
+}
+
+public void setUserRepo(UserRepository userRepo) {
+	this.userRepo = userRepo;
+}
 
 	public String getLoggedInUserId(){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -24,12 +34,12 @@ public class UserService {
 
 	public User getLoggedInUser() {
 		String loggedInUserId = this.getLoggedInUserId();
-		User user = this.getUserInfoByUserId(loggedInUserId);
+		User user = this.getUserInfoByUserName(loggedInUserId);
 		return user;
 	}
 
-	public User getUserInfoByUserId(String userId){
-			User user = this.userRepo.findOneByUserId(userId).orElseGet( () -> new User());
+	public User getUserInfoByUserName(String userId){
+			User user = this.userRepo.findOneByUsername(userId).orElseGet( () -> new User());
 			return user;
 	}
 
@@ -39,7 +49,7 @@ public class UserService {
 	}
 
 	public boolean addNewUser(User user) {
-		User newUser = this.getUserInfoByUserId(user.getUserId());
+		User newUser = this.getUserInfoByUserName(user.getUsername());
 		if (newUser.getUserId().equals("new")){
 			// This means the username is not found therfore its is returning a default value of "new"
 			return this.insertOrSaveUser(user);

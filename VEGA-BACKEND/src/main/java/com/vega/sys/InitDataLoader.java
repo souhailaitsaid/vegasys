@@ -15,6 +15,7 @@ import com.vega.sys.model.Catalog;
 import com.vega.sys.model.Category;
 import com.vega.sys.model.Client;
 import com.vega.sys.model.Page;
+import com.vega.sys.model.user.Role;
 import com.vega.sys.model.user.User;
 import com.vega.sys.repository.CatalogRepository;
 import com.vega.sys.repository.CategoryRepository;
@@ -127,7 +128,8 @@ public class InitDataLoader implements ApplicationRunner {
 		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
 	
 	
-		User u = userRepository.save(new User("demo", "demo", "demo", "demo"));
+		userRepository.save(new User("admin", "admin",Role.ADMIN, "demo", "demo"));
+		 userRepository.save(new User("user", "user",Role.USER, "demo", "demo"));
 	}
 
 }
