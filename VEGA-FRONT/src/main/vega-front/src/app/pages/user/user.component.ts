@@ -130,15 +130,19 @@ export class UserComponent implements OnInit {
   }
   onDeleteConfirm(event): void {
     if (event.data) {
-      this.showLargeModal(event.data.userName, event)
+      this.showLargeModal(event.data.userId, event)
     }
   }
 
   delete(id: number, event) {
     this.service.deleteById(id).subscribe(
       res => {
-        this.showToast('success', this.translate.instant(res.message), '')
-        this.getAll()
+        if(res.success){
+          this.showToast('success', this.translate.instant(res.message), '')
+        }else{
+          this.showToast('warning', this.translate.instant(res.message), '')
+        }
+         this.getAll()
       },
       error => {
         this.showToast('error', this.translate.instant('messages.server-error'), '')
@@ -152,7 +156,7 @@ export class UserComponent implements OnInit {
         this.edit(event)
     }
     else if (event.action === 'deleteAction') {
-      this.showLargeModal(event.data.userName, event)
+      this.showLargeModal(event.data.userId, event)
     }
 
   }

@@ -14,33 +14,45 @@ import { UserInfoService } from '../services/user-info.service';
   `,
 })
 export class PagesComponent implements OnInit {
-  menu  : NbMenuItem[]
-  constructor(private translate: TranslateService, private userInfoService : UserInfoService) { 
+  menu: NbMenuItem[]
+  constructor(private translate: TranslateService, private userInfoService: UserInfoService) {
 
   }
   ngOnInit() {
-    
-   this.menu  = [
+
+    this.menu = [
+      {
+        title: this.translate.instant('common.menu.home'),
+        icon: 'nb-home',
+        link: '/pages/home',
+        home: true,
+      },
+      {
+        title: this.translate.instant('common.menu.catalogs'),
+        icon: 'nb-star',
+        link: '/pages/my-catalogs',
+        hidden: !this.userInfoService.isUser()
+      },
       {
         title: this.translate.instant('common.menu.dashboard'),
         icon: 'nb-bar-chart',
         link: '/pages/dashboard',
-        home: true,
+        hidden: !this.userInfoService.isAdmin()
       },
       {
         title: this.translate.instant('common.menu.clients'),
         icon: 'nb-star',
         link: '/pages/clients',
-        hidden : !this.userInfoService.isAdmin()
+        hidden: !this.userInfoService.isAdmin()
       },
       {
         title: this.translate.instant('common.menu.users'),
         icon: 'nb-person',
         link: '/pages/users',
-        hidden : !this.userInfoService.isAdmin()
+        hidden: !this.userInfoService.isAdmin()
       },
       {
-        hidden : !this.userInfoService.isAdmin(),
+        hidden: !this.userInfoService.isAdmin(),
         title: this.translate.instant('common.menu.config'),
         icon: 'nb-gear',
         children: [
@@ -48,7 +60,7 @@ export class PagesComponent implements OnInit {
             title: this.translate.instant('common.menu.categories'),
             link: '/pages/configuration/categories',
           },
-         
+
 
         ],
       },
@@ -80,5 +92,5 @@ export class PagesComponent implements OnInit {
       },*/
     ];
   }
-  
+
 }

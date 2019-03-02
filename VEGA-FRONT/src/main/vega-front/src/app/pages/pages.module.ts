@@ -10,6 +10,7 @@ import { ClientModule } from './client/client.module';
 import { CatalogModule } from './catalog/catalog.module';
 import { UserModule } from './user/user.module';
 import { ProfileModule } from './profile/profile.module';
+import { HomeModule } from './home/home.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -26,6 +27,7 @@ const PAGES_COMPONENTS = [
     ConfigurationModule,
     UserModule,
     ProfileModule,
+    HomeModule,
     MiscellaneousModule,
   ],
   declarations: [

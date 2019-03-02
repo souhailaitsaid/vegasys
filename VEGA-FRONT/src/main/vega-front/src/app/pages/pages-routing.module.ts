@@ -9,6 +9,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { AuthGuard } from '../services/auth_guard.service';
 import { UserComponent } from './user/user.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,14 +17,25 @@ const routes: Routes = [{
   canActivateChild:[AuthGuard],
   children: [
     {
-      path: 'dashboard',
-      component: DashboardComponent,
+      path: 'home',
+      component: HomeComponent,
       data: { expectedRoles: []}
     },
+    {
+      path: 'dashboard',
+      component: DashboardComponent,
+      data: { expectedRoles: ['ADMIN']}
+    },
+    
     {
       path: 'clients',
       component: ClientComponent,
       data: { expectedRoles: ['ADMIN']}
+    },
+    {
+      path: 'my-catalogs',
+      component: CatalogComponent,
+      data: { expectedRoles: ['USER']}
     },
     {
       path: 'catalogs/client/:id',
@@ -48,7 +60,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'home',
       pathMatch: 'full',
     },
     {

@@ -7,6 +7,7 @@ export interface UserInStorage {
     displayName: string;
     token: string;
     roles: string[];
+    client:any
 }
 
 export interface LoginInfoInStorage {
@@ -42,6 +43,7 @@ export class UserInfoService {
             let userInfoString: string = this.storage.getItem(this.currentUserKey);
             if (userInfoString) {
                 let userObj: UserInStorage = JSON.parse(this.storage.getItem(this.currentUserKey));
+                //console.log(userObj)
                 return userObj;
             }
             else {
@@ -60,7 +62,7 @@ export class UserInfoService {
     //Get User's Display name from session storage
     getUserName(): string {
         let userObj: UserInStorage = this.getUserInfo();
-        console.log(userObj)
+        //console.log(userObj)
         if (userObj !== null) {
             return userObj.username
         }
@@ -70,7 +72,7 @@ export class UserInfoService {
     isAdmin() {
         let userObj: UserInStorage = this.getUserInfo();
         if (userObj !== null) {
-            console.log('isAdmin : '+(userObj.roles.indexOf("ADMIN") > -1))
+           // console.log('isAdmin : '+(userObj.roles.indexOf("ADMIN") > -1))
             return userObj.roles.indexOf("ADMIN") > -1
         }
        

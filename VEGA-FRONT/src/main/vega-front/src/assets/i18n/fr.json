@@ -1,10 +1,18 @@
 {
     "messages": {
+        "user-admin-not-deleted":"L'utilisateur Admin est protegé contre la suppression",
         "deleted": "Element suprimmé",
         "added": "Element ajouté",
         "updated": "Element modifié",
         "client": {
             "unique":"Nom client ou email déja existant"
+        },
+        "user": {
+            "notPresent":"Utilisateur non existant"
+        },
+        "password": {
+            "noMatch":"Mot de passe actuel est incorrect",
+            "changed":"Mot de passe changé"
         }
     },
     "modals":{
@@ -31,8 +39,13 @@
             "clients": "Clients",
             "dashboard": "Tableau de bord",
             "categories": "catégories",
-            "users":"Utilisateurs"
+            "catalogs": "Mes catalogs",
+            "users":"Utilisateurs",
+            "home":"Acceuil"
         }
+    },
+    "home":{
+        "welcome":"Bienvenue {{name}}"
     },
     "dashboard":{
         "nbrCatalogsByClient":"Nombre de catalogues par client",

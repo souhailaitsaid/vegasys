@@ -14,6 +14,7 @@ import { NbCalendarRange, NbDateService } from '@nebular/theme';
 import { DatePipe } from '@angular/common';
 import { PageModalComponent } from './page-modal/page-modal.component';
 import { DataService } from '../../services/data-service';
+import { UserInfoService } from '../../services/user-info.service';
 
 @Component({
   selector: 'ngx-catalog',
@@ -36,7 +37,7 @@ export class CatalogComponent implements OnInit {
     private clientService: ClientService,
     private service: CatalogService,
     private modalService: NgbModal,
-    private toaster: ToasterService,
+    private toaster: ToasterService,private userInfo : UserInfoService,
     private translate: TranslateService, private datePipe: DatePipe) {
 
     this.range = {
@@ -72,15 +73,22 @@ export class CatalogComponent implements OnInit {
       }
 
     });*/
-
-    if (!this.dataservice.client) {
-      this.router.navigate(['pages/clients'])
-    } else {
-      this.client = this.dataservice.client
-      this.getAll(this.client.clientId)
-     
-    
+    if(this.userInfo.isAdmin()){
+      if (!this.dataservice.client) {
+        this.router.navigate(['pages/clients'])
+      } else {
+        this.client = this.dataservice.client
+        this.getAll(this.client.clientId)
+      }
+    }else{
+      if (!this.userInfo.getUserInfo().client) {
+        this.router.navigate(['pages/home'])
+      } else {
+        this.client = this.userInfo.getUserInfo().client
+        this.getAll(this.client.clientId)
+      }
     }
+   
     this.settings = this.getSettings()
     this.form = new FormGroup({
       catalogId: new FormControl(),

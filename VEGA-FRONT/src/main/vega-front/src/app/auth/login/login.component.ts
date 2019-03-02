@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/api/login.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserInfoService } from '../../services/user-info.service';
+import { DataService } from '../../services/data-service';
 
 @Component({
   selector: 'ngx-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private loginService: LoginService,private userInfoService : UserInfoService) { }
+    private loginService: LoginService,private userInfoService : UserInfoService,private dataService : DataService) { }
   ngOnInit() {
     this.form = new FormGroup({
       username: new FormControl(null, Validators.required),
@@ -47,6 +48,7 @@ export class LoginComponent implements OnInit {
         }
         else {
           this.loading = false;
+          this.dataService.client = resp.item.client
           this.userInfoService.storeUserInfo(JSON.stringify(resp.item));
           console.log(resp)
           this.router.navigate([this.loginService.landingPage]);

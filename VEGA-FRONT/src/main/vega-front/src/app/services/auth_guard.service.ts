@@ -38,14 +38,14 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         console.log("The url "+ url + " needs roles : "+JSON.stringify(expectedRoles)+' connected user has : '+JSON.stringify(user.roles));
         
         this.loginService.landingPage = url;
-        console.log("next landingPage is : ",url);
+       // console.log("next landingPage is : ",url);
         this.router.navigate(['/auth',]);
         return false;
     }
 
     private matchRole(expectedRoles :string [],  roles : string [] ){
-        console.log(expectedRoles)
-        console.log(roles)
+       // console.log(expectedRoles)
+       // console.log(roles)
         let  intersection = []
         roles.filter(element => {
                 if(expectedRoles.indexOf(element) != -1){
