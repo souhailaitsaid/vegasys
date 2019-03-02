@@ -128,8 +128,12 @@ public class InitDataLoader implements ApplicationRunner {
 		catalogRepository.save(new Catalog(null, new Date(), new Date(), cl6,"Catalog description"));
 	
 	
-		userRepository.save(new User("admin", "admin",Role.ADMIN, "demo", "demo"));
-		 userRepository.save(new User("user", "user",Role.USER, "demo", "demo"));
+		userRepository.save(new User("admin", "admin","admin@admin",Role.ADMIN, "demo", "demo",null));
+		 userRepository.save(new User("user", "user","user@user",Role.USER, "user", "user",cl1));
+		 userRepository.save(new User("user5", "user5","user5@user5",Role.USER, "user5", "user5",cl5));
+		 userRepository.save(new User("user2", "user2","user2@user2",Role.USER, "user2", "user2",cl2));
+		 userRepository.save(new User("user3", "user3","user3@user3",Role.USER, "user3", "user3",cl3));
+		 userRepository.save(new User("user4", "user4","user4@user4",Role.USER, "user4", "user4",cl4));
 	}
 
 }

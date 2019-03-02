@@ -1,3 +1,45 @@
-<p>
-  profile works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+<nb-card>
+  <nb-card-header>{{'profile.changePassword' | translate : {name:user?.username} }}</nb-card-header>
+  <nb-card-body>
+    <form novalidate [formGroup]="form" (ngSubmit)="changePassword()">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'profile.oldPassword' | translate}}</label>
+            <input type="password" formControlName="oldPassword" class="form-control" placeholder="{{'profile.oldPassword' | translate}}">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'profile.newPassword' | translate}}</label>
+            <input type="password" formControlName="newPassword" class="form-control" placeholder="{{'profile.newPassword' | translate}}">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'profile.confirmPassword' | translate}}</label>
+            <input type="password" formControlName="confirmPassword" class="form-control" placeholder="{{'profile.confirmPassword' | translate}}">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <div class="form-group">
+
+            <button type="submit" [disabled]="!form.valid || passwordNotMatch()" class="btn btn-primary">{{'common.btn.save' |
+              translate}}</button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </nb-card-body>
+</nb-card>
+</div>
+</div>
+
+<toaster-container [toasterconfig]="config"></toaster-container>

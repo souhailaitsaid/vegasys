@@ -18,7 +18,7 @@ export class CatalogService  extends AbstractRestService<any>{
   }
 
   findAllByClientId(id: number): Observable<any>  {
-    return this.apiRequest.get(URI+'/client/' + + `${id}`)
+    return this.apiRequest.get(URI+'/client/' + `${id}`)
   }
 
 

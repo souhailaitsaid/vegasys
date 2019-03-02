@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 export interface UserInStorage {
     userId: number;
-    userName: string;
+    username: string;
     email: string;
     displayName: string;
     token: string;
@@ -60,8 +60,9 @@ export class UserInfoService {
     //Get User's Display name from session storage
     getUserName(): string {
         let userObj: UserInStorage = this.getUserInfo();
+        console.log(userObj)
         if (userObj !== null) {
-            return userObj.displayName
+            return userObj.username
         }
         return "no-user";
     }

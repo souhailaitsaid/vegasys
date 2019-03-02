@@ -46,7 +46,7 @@ export class UserComponent implements OnInit {
     this.settings = this.getSettings()
     this.form = new FormGroup({
       userId: new FormControl(),
-      userName: new FormControl(null, Validators.required),
+      username: new FormControl(null, Validators.required),
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -63,7 +63,7 @@ export class UserComponent implements OnInit {
     if (this.form.valid) {
       let element: any = {
         userId: this.form.controls['userId'].value,
-        userName: this.form.controls['userName'].value,
+        username: this.form.controls['username'].value,
         firstName: this.form.controls['firstName'].value,
         lastName: this.form.controls['lastName'].value,
         email: this.form.controls['email'].value,
@@ -118,7 +118,7 @@ export class UserComponent implements OnInit {
     console.log(event);
     this.form.patchValue({
       userId: event.data.userId,
-       userName: event.data.userName,
+       username: event.data.username,
         firstName: event.data.firstName,
         lastName: event.data.lastName,
         email: event.data.email,
@@ -201,8 +201,8 @@ export class UserComponent implements OnInit {
           title: this.translate.instant('common.id'),
           type: 'number',
         },
-      userName: {
-          title: this.translate.instant('user.userName'),
+      username: {
+          title: this.translate.instant('user.username'),
           type: 'string',
         },
         firstName: {

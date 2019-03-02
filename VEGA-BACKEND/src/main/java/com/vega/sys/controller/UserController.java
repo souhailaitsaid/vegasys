@@ -1,6 +1,7 @@
 package com.vega.sys.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +13,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,8 +25,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.google.common.base.Strings;
 import com.vega.sys.model.Client;
+import com.vega.sys.model.Page;
 import com.vega.sys.model.user.User;
 import com.vega.sys.model.user.UserResponse;
+import com.vega.sys.repository.UserRepository;
 import com.vega.sys.response.OperationResponse;
 import com.vega.sys.response.Response;
 import com.vega.sys.response.OperationResponse.ResponseStatusEnum;
@@ -55,11 +60,59 @@ public class UserController {
 
 	}
 	
+	@GetMapping("/users/find/{username}")
+	public ResponseEntity<Optional<User>> find(@PathVariable("username") String username) throws InterruptedException {
+		
+		Optional<User> r = null;
+		try {
+			r =  userService.getUserRepo().findOneByUsername(username);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Optional<User>>(r, HttpStatus.OK);
+	}
+	@CacheEvict(allEntries = true)
+	@GetMapping("/users/changePassword/{username}")
+	public ResponseEntity<Response> changePassword(@PathVariable("username") String username,@RequestParam("oldPassword") String oldPassword,@RequestParam("newPassword") String newPassword) throws InterruptedException {
+		String message =  null;
+		boolean status;
+		Optional<User> r = null;
+		try {
+			r =  userService.getUserRepo().findOneByUsername(username);
+			if(r.isPresent()) {
+				User u = r.get();
+				if(oldPassword.equals(u.getPassword())){
+					u.setPassword((newPassword));
+					userService.getUserRepo().save(u);
+					message = "profile.password.changed";
+					status = true;
+				}
+				else {
+					message = "profile.password.noMatch";
+				}
+			}
+			else {
+				message = "profile.user.notPresent";
+				return new ResponseEntity<Response>(new Response(false, message), HttpStatus.OK);
+			}
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Response>(new Response(false, e.getMessage()), HttpStatus.CREATED);
+		}
+		return new ResponseEntity<Response>(new Response(true, message), HttpStatus.CREATED);
+	}
+	
 	@CacheEvict(allEntries = true)
 	@PostMapping()
 	public ResponseEntity<Response> save(@RequestBody User user, UriComponentsBuilder builder) {
 		String message = user.getUserId()!=null ?  "messages.updated" : "messages.added";
 		try {
+			if(user.getUserId()!= null) {
+				User r =  userService.getUserRepo().getOne(user.getUserId());
+				user.setPassword(r.getPassword());		
+			}
 			userService.getUserRepo().save(user);
 			
 		} catch (DataIntegrityViolationException e) {
