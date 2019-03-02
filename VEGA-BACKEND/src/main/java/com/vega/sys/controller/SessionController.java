@@ -66,7 +66,7 @@ public class SessionController {
             sessionItem.setLastName(user.getLastName());
             sessionItem.setEmail(user.getEmail());
             sessionItem.setRoles(Arrays.asList(user.getRole().name()));
-
+            sessionItem.setClient(user.getClient());
             resp.setOperationStatus(ResponseStatusEnum.SUCCESS);
             resp.setOperationMessage("Dummy Login Success");
             resp.setItem(sessionItem);
