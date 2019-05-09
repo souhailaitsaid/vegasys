@@ -1,4 +1,4 @@
-package com.vega.sys.controller;
+package com.vega.sys.secured.controller;
 
 
 import java.io.File;

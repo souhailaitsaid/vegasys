@@ -43,7 +43,7 @@
 
 
   <div class="col-md-9">
-    <nb-card class="full-width">
+    <nb-card [nbSpinner]="loading" nbSpinnerStatus="danger" nbSpinnerSize="xlarge" class="full-width">
       <nb-card-header>
         {{'catalog.list' | translate : {name: client?.clientName} }}
       </nb-card-header>

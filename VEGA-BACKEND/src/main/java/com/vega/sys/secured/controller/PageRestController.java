@@ -1,4 +1,4 @@
-package com.vega.sys.controller;
+package com.vega.sys.secured.controller;
 
 import java.util.List;
 
@@ -19,41 +19,55 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.vega.sys.model.Category;
-import com.vega.sys.repository.CategoryRepository;
+import com.vega.sys.model.Page;
+import com.vega.sys.repository.PageRepository;
 import com.vega.sys.response.Response;
 
 @RestController
-@RequestMapping("/categories")
-@CacheConfig(cacheNames = "categories")
+@RequestMapping("/pages")
+@CacheConfig(cacheNames = "pages")
 @CrossOrigin(origins = "*")
-public class CategoryRestController {
+public class PageRestController {
 	@Autowired
-	private CategoryRepository categoryRepository;
-	private static Sort SORTING_DESC = new Sort(Sort.Direction.DESC, "categoryId");
+	private PageRepository pageRepository;
+	private static Sort SORTING_DESC = new Sort(Sort.Direction.DESC, "pageId");
 
 	@GetMapping()
 	@Cacheable()
-	public ResponseEntity<List<Category>> all() throws InterruptedException {
+	public ResponseEntity<List<Page>> all() throws InterruptedException {
 		
-		List<Category> list = null;
+		List<Page> list = null;
 		try {
-			list = categoryRepository.findAll(SORTING_DESC);
+			list = pageRepository.findAll(SORTING_DESC);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<List<Category>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<List<Page>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<List<Category>>(list, HttpStatus.OK);
+		return new ResponseEntity<List<Page>>(list, HttpStatus.OK);
+
+	}
+
+	@GetMapping("/catalog/{id}")
+	@Cacheable()
+	public ResponseEntity<List<Page>> byClientId(@PathVariable("id") Long id) throws InterruptedException {
+		
+		List<Page> list = null;
+		try {
+			list = pageRepository.findByCatalogCatalogId(id,SORTING_DESC);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<Page>>(list, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<Page>>(list, HttpStatus.OK);
 
 	}
 	
-	
-	@CacheEvict(allEntries = true)
+	@CacheEvict(value = { "pages", "catalogs" },allEntries = true)
 	@PostMapping()
-	public ResponseEntity<Response> save(@RequestBody Category category, UriComponentsBuilder builder) {
-		String message = category.getId()!=null ?  "messages.updated" : "messages.added";
+	public ResponseEntity<Response> save(@RequestBody Page page, UriComponentsBuilder builder) {
+		String message = page.getId()!=null ?  "messages.updated" : "messages.added";
 		try {
-			categoryRepository.save(category);
+			pageRepository.save(page);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Response>(new Response(false, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -62,23 +76,23 @@ public class CategoryRestController {
 	}
 
 	@GetMapping("/find/{id}")
-	public ResponseEntity<Category> find(@PathVariable("id") Long id) throws InterruptedException {
+	public ResponseEntity<Page> find(@PathVariable("id") Long id) throws InterruptedException {
 		
-		Category r = null;
+		Page r = null;
 		try {
-			r = categoryRepository.getOne(id);
+			r = pageRepository.getOne(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new ResponseEntity<Category>(r, HttpStatus.OK);
+		return new ResponseEntity<Page>(r, HttpStatus.OK);
 	}
 	
-	@CacheEvict(allEntries = true)
+	@CacheEvict(value = { "pages", "catalogs" },allEntries = true)
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Response> delete(@PathVariable("id") Long id) {
 		try {
 
-			categoryRepository.deleteById(id);
+			pageRepository.deleteById(id);
 			return new ResponseEntity<Response>(new Response(true, "messages.deleted"), HttpStatus.OK);
 
 		}  catch (Exception e) {

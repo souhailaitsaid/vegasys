@@ -22,6 +22,7 @@ import { UserInfoService } from '../../services/user-info.service';
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent implements OnInit {
+  loading = false;
   range: NbCalendarRange<Date>;
   param
   client: any
@@ -99,15 +100,18 @@ export class CatalogComponent implements OnInit {
 
 
   getAll(id: number) {
+    this.loading = true;
     this.service.findAllByClientId(id)
       .subscribe(
         elements => {
           this.source.load(elements);
           console.log(elements);
+          this.loading = false;
         },
         err => {
           this.showToast('error', this.translate.instant('messages.server-error'), '')
           console.log(err)
+          this.loading = false;
         }
       )
   }
